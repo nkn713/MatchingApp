@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロフィール設定</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/S_profile_input.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
+    <hr>
+    <div class="form-content">
+        <form method="post" action="{{ url_for('homeview_bp.profile') }}">
+            <div>
+                <label for="name">名前:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="gender">性別:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">男性</option>
+                    <option value="female">女性</option>
+                    <option value="other">その他</option>
+                </select>
+            </div>
+            <div>
+                <label for="affiliation">所属:</label>
+                <input type="text" id="affiliation" name="affiliation" required>
+            </div>
+            <div>
+                <label for="grade">学年:</label>
+                <input type="text" id="grade" name="grade" required>
+            </div>
+            <div class="buttons">
+                <button type="button" class="back-button" onclick="location.href='/home/student_home'">戻る</button>
+                <button type="submit" class="complete-button">保存</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
