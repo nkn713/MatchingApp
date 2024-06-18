@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- W12 講師選択画面 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>教師選択画面</h1>
+    <div class="right">
+        <a href="{{ url_for('S_select_teacher.back') }}"> 
+            <button class="button">科目選択画面へ戻る</button>
+        </a>
+    </div>
+    <form action="{{ url_for('S_select_teacher.confirm') }}" method="post">
+        <div>
+            <img src="sample1.png">
+            <input type="radio" id="teacher_1" name="selected_teacher"  checked>
+            <label for="student">講師１</label>
+        </div>
+        <div>
+            <img src="sample2.png">
+            <input type="radio" id="teacher_2" name="selected_teacher" >
+            <label for="teacher">講師２</label>
+        </div>
+        <div>
+            <img src="sample3.png">
+            <input type="radio" id="teacher_3" name="selected_teacher" >
+            <label for="admin">講師３</label>
+        </div>
+        <button type="submit">確定</button>
+    </form>
+</body>
+</html>

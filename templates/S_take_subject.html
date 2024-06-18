@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- W9 受講希望科目選択画面 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受講希望科目選択画面</title>
+    <link rel="stylesheet" href="../static/css/S_take_subject.css">
+    <style>
+        /* 追加したCSS */
+        .toggle-button {
+            position: relative;
+            padding-left: 30px; /* ▶アイコンの分、左側の余白を設定 */
+        }
+
+        .toggle-button::before {
+            content: "▶"; /* 最初は▶を表示 */
+            position: absolute;
+            left: 10px; /* 左からの位置 */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .subjects {
+            display: none; /* 最初は非表示 */
+        }
+
+        .subjects.active {
+            display: block; /* クリックで表示 */
+        }
+
+        .toggle-button.active::before {
+            content: "▼"; /* 展開中は▼に変更 */
+        }
+    </style>
+    <script>
+        function onLogout() {
+            window.location.href = '/logout';
+        }
+        
+        function onBack() {
+            window.location.href = '/home/select_date'; // S_attend_day.htmlにリダイレクト
+        }
+
+        function onComplete() {
+            window.location.href = '/home/student_home'; // S_homeview.htmlにリダイレクト
+        }
+        
+        function toggleSubjects(subjectId) {
+            var subjectsDiv = document.getElementById(subjectId);
+            subjectsDiv.classList.toggle('active');
+            
+            var toggleButton = document.getElementById(subjectId + '-toggle');
+            toggleButton.classList.toggle('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">ようこそ 佐野 さん</div>
+        <button class="logout-button" onclick="onLogout()">ログアウト</button>
+    </div>
+    <hr>
+    <div class="content">
+        <h2>受講希望科目を選択してください</h2>
+        
+        <div class="toggle-buttons">
+            <button id="elementarySubjects-toggle" class="toggle-button" onclick="toggleSubjects('elementarySubjects')">小学生</button>
+            <div id="elementarySubjects" class="subjects">
+                <label><input type="checkbox" name="elementarySubjects" value="国語"> 国語</label>
+                <label><input type="checkbox" name="elementarySubjects" value="数学"> 数学</label>
+                <label><input type="checkbox" name="elementarySubjects" value="理科"> 理科</label>
+                <label><input type="checkbox" name="elementarySubjects" value="社会"> 社会</label>
+                <label><input type="checkbox" name="elementarySubjects" value="英語"> 英語</label>
+            </div>
+            
+            <button id="middleSchoolSubjects-toggle" class="toggle-button" onclick="toggleSubjects('middleSchoolSubjects')">中学生</button>
+            <div id="middleSchoolSubjects" class="subjects">
+                <label><input type="checkbox" name="middleSchoolSubjects" value="国語"> 国語</label>
+                <label><input type="checkbox" name="middleSchoolSubjects" value="数学"> 数学</label>
+                <label><input type="checkbox" name="middleSchoolSubjects" value="英語"> 英語</label>
+                <label><input type="checkbox" name="middleSchoolSubjects" value="理科"> 理科</label>
+                <label><input type="checkbox" name="middleSchoolSubjects" value="社会"> 社会</label>
+            </div>
+            
+            <button id="highSchoolSubjects-toggle" class="toggle-button" onclick="toggleSubjects('highSchoolSubjects')">高校生</button>
+            <div id="highSchoolSubjects" class="subjects">
+                <label><input type="checkbox" name="highSchoolSubjects" value="現代文"> 現代文</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="古文"> 古文</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="漢文"> 漢文</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学Ⅰ"> 数学Ⅰ</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学Ⅱ"> 数学Ⅱ</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学Ⅲ"> 数学Ⅲ</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学A"> 数学A</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学B"> 数学B</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="数学C"> 数学C</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="物理"> 物理</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="化学"> 化学</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="生物"> 生物</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="英語"> 英語</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="日本史"> 日本史</label>
+                <label><input type="checkbox" name="highSchoolSubjects" value="世界史"> 世界史</label>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button type="button" class="back-button" onclick="onBack()">戻る</button>
+            <button type="button" class="complete-button" onclick="onComplete()">完了</button>
+        </div>
+    </div>
+</body>
+</html>
