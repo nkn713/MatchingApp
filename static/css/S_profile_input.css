@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080; /* グレーの背景色 */
+    padding: 10px 20px;
+}
+
+.header .welcome-message {
+    font-size: 18px;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+.header .logout-button {
+    background: transparent;
+    border: 2px solid #f2f2f2; /* 白のボーダーカラー */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.form-content {
+    padding: 20px;
+    background-color: #fff; /* 白色の背景 */
+    color: #000; /* 黒色のテキスト */
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.form-content div {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-content label {
+    font-weight: bold;
+}
+
+.form-content input, .form-content select {
+    padding: 8px;
+    width: 200px; /* 横幅を短く設定 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 20px; /* 追加 */
+}
+
+.buttons .back-button, .buttons .complete-button {
+    background: none;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
