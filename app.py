@@ -11,9 +11,20 @@ from routes.UI.T_homeview import T_homeview_bp
 from routes.UI.T_attend_day import T_attend_day_bp
 from routes.UI.T_take_subject import T_take_subject_bp
 from routes.UI.A_info_list import admin_bp
+#
+from flask_mysqldb import MySQL
+#
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+#
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'  # データベースのユーザ名
+app.config['MYSQL_PASSWORD'] = 'Team08MatchingApp'  # データベースのパスワード
+app.config['MYSQL_DB'] = 'test'  # 使用するデータベース名
+mysql = MySQL(app)
+#
 
 app.register_blueprint(login_bp, url_prefix='/')
 app.register_blueprint(logout_bp, url_prefix='/')
