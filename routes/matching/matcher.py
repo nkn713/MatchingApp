@@ -1,12 +1,14 @@
+# matching/matcher.py
+
 import mysql.connector
 from collections import defaultdict
 
 # データベース接続の設定
 db_config = {
-    'user': 'your_username',
-    'password': 'your_password',
-    'host': 'your_host',
-    'database': 'your_database'
+    'user': 'team08',
+    'password': 'pass08',
+    'host': 'localhost',
+    'database': 'MatchingApp'
 }
 
 # データベースに接続する
@@ -55,7 +57,10 @@ def display_matches(matches):
         print(f"Student ID: {student_id}")
         for teacher in teachers:
             print(f"  Teacher ID: {teacher['id']}, Name: {teacher['name']}, Subjects: {teacher['subjects']}")
-            print(f"  Reviews: {teacher['reviews']}")
+            cursor.execute("SELECT * FROM Reviews WHERE teacher_id = %s", (teacher['id'],))
+            reviews = cursor.fetchall()
+            for review in reviews:
+                print(f"    Review: {review['review_text']} (Rating: {review['rating']})")
         print()
 
 if __name__ == "__main__":
