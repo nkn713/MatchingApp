@@ -20,9 +20,9 @@ app.secret_key = 'your_secret_key'
 
 #
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'  # データベースのユーザ名
-app.config['MYSQL_PASSWORD'] = 'Team08MatchingApp'  # データベースのパスワード
-app.config['MYSQL_DB'] = 'test'  # 使用するデータベース名
+app.config['MYSQL_USER'] = 'team08'  # データベースのユーザ名
+app.config['MYSQL_PASSWORD'] = 'pass08'  # データベースのパスワード
+app.config['MYSQL_DB'] = 'MatchingApp'  # 使用するデータベース名
 mysql = MySQL(app)
 #
 
