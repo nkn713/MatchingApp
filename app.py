@@ -10,7 +10,7 @@ from routes.UI.S_take_subject import take_subject_bp
 from routes.UI.T_homeview import T_homeview_bp
 from routes.UI.T_attend_day import T_attend_day_bp
 from routes.UI.T_take_subject import T_take_subject_bp
-from routes.UI.A_info_list import admin_bp
+# from routes.UI.A_info_list import admin_bp
 #
 from flask_mysqldb import MySQL
 #
@@ -37,7 +37,7 @@ app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
 app.register_blueprint(T_attend_day_bp, url_prefix='/attend_day')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
-app.register_blueprint(admin_bp, url_prefix='/admin')
+# app.register_blueprint(admin_bp, url_prefix='/admin')
 
 if __name__ == '__main__':
     app.run(debug=True)
