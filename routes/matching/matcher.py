@@ -1,74 +1,51 @@
-# matching/matcher.py
-
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
-from collections import defaultdict
 
-# データベース接続の設定
-db_config = {
-    'user': 'team08',
-    'password': 'pass08',
-    'host': 'localhost',
-    'database': 'MatchingApp'
-}
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
-# データベースに接続する
-conn = mysql.connector.connect(**db_config)
-cursor = conn.cursor(dictionary=True)
+def get_db_connection():
+    connection = mysql.connector.connect(
+        host='localhost',
+        user='team08',
+        password='pass08',
+        database='MatchingApp'
+    )
+    return connection
 
-def get_students():
-    cursor.execute("SELECT * FROM Students")
-    return cursor.fetchall()
+@app.route('/match')
+def match_students():
+    student_id = request.args.get('student_id')
+    if not student_id:
+        return "Student ID is required", 400
 
-def get_teachers():
-    cursor.execute("SELECT * FROM Teachers")
-    return cursor.fetchall()
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
 
-def match_students_to_teachers(students, teachers):
-    matches = defaultdict(list)
+    cursor.execute('SELECT * FROM student_profiles WHERE id = %s', (student_id,))
+    student = cursor.fetchone()
 
-    for student in students:
-        potential_teachers = []
+    if not student:
+        return "Student not found", 404
 
-        for teacher in teachers:
-            score = 0
-            # 1. 生徒の受講希望科目と講師の教務可能科目
-            if student['preferred_subject'] in teacher['subjects']:
-                score += 3
-            # 2. 生徒の受講希望曜日と講師の出勤可能曜日
-            student_days = set(student['preferred_days'].split(','))
-            teacher_days = set(teacher['available_days'].split(','))
-            if not student_days.isdisjoint(teacher_days):
-                score += 2
-            # 3. 生徒と講師の性別
-            if student['gender'] == teacher['gender']:
-                score += 1
-            
-            if score > 0:
-                potential_teachers.append((teacher, score))
-        
-        # スコア順にソートして上位3人を選出
-        potential_teachers.sort(key=lambda x: x[1], reverse=True)
-        matches[student['id']] = [t[0] for t in potential_teachers[:3]]
-    
-    return matches
+    cursor.execute('SELECT * FROM teacher_profiles')
+    teachers = cursor.fetchall()
 
-def display_matches(matches):
-    for student_id, teachers in matches.items():
-        print(f"Student ID: {student_id}")
-        for teacher in teachers:
-            print(f"  Teacher ID: {teacher['id']}, Name: {teacher['name']}, Subjects: {teacher['subjects']}")
-            cursor.execute("SELECT * FROM Reviews WHERE teacher_id = %s", (teacher['id'],))
-            reviews = cursor.fetchall()
-            for review in reviews:
-                print(f"    Review: {review['review_text']} (Rating: {review['rating']})")
-        print()
+    # マッチングロジック
+    matched_teachers = sorted(teachers, key=lambda teacher: (
+        teacher['subjects'].split(',').count(student['desired_subject']),  # ①受講希望科目
+        len(set(teacher['available_days'].split(',')).intersection(student['available_days'].split(','))),  # ②受講希望曜日
+        teacher['gender'] == student['gender']  # ③性別
+    ), reverse=True)[:3]
 
-if __name__ == "__main__":
-    students = get_students()
-    teachers = get_teachers()
-    matches = match_students_to_teachers(students, teachers)
-    display_matches(matches)
+    for teacher in matched_teachers:
+        cursor.execute('SELECT * FROM reviews WHERE teacher_id = %s', (teacher['id'],))
+        teacher['reviews'] = cursor.fetchall()
 
-    # データベース接続を閉じる
     cursor.close()
-    conn.close()
+    connection.close()
+
+    return render_template('matched_teachers.html', student=student, teachers=matched_teachers)
+
+if __name__ == '__main__':
+    app.run(debug=True)
