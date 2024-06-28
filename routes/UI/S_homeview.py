@@ -19,7 +19,7 @@ def profile():
         grade = request.form['grade']
         # プロフィール情報をデータベースに保存するコードを追加します。
         return redirect(url_for('homeview_bp.student_home'))
-    return render_template('S_profile_input.html')
+    return render_template('S_profile_input.html', username=session.get('username'), form_data={}, errors={})
 
 @homeview_bp.route('/select_date', methods=['GET', 'POST'])
 def select_date():
