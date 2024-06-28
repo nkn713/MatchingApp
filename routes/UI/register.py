@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 #追加
 from flask_mysqldb import MySQL 
 from flask import current_app
-from signUp.signup import RegisterToDatabase
+from routes.signUp.signup import RegisterToDatabase
 #追加
 
 register_bp = Blueprint('register', __name__)
