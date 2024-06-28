@@ -13,8 +13,6 @@ def register():
         email = request.form['email']
         password = request.form['password']
         user_type = request.form['user_type']
-        session['email'] = email
-        session['password'] = password
         # ここで新規登録処理を実行する
 
         #追加
@@ -37,7 +35,3 @@ def success():
 @register_bp.route('/login')
 def login():
     return render_template('login.html')
-
-if __name__ == '__main__':
-    app.register_blueprint(register_bp)
-    app.run(debug=True)
