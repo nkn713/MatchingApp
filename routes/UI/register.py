@@ -2,13 +2,10 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 #追加
 from flask_mysqldb import MySQL 
 from flask import current_app
+from signUp.signup import RegisterToDatabase
 #追加
 
 register_bp = Blueprint('register', __name__)
-
-#追加
-mysql = MySQL()
-#
 
 @register_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -21,10 +18,7 @@ def register():
         # ここで新規登録処理を実行する
 
         #追加
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO login (password, email, user_type) VALUES (%s, %s, %s)", (password, email, user_type))
-        mysql.connection.commit()
-        cur.close()
+        RegisterToDatabase(password,email,user_type)
         #追加
         return redirect(url_for('register.login'))
 
