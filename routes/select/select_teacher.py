@@ -48,7 +48,7 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 
-def insert_match_info(student_email, teacher_email):
+def insert_match_status(student_email, teacher_email):
     try:
         # データベース接続の設定
         connection = mysql.connector.connect(
@@ -63,7 +63,7 @@ def insert_match_info(student_email, teacher_email):
 
             # 挿入クエリの作成
             insert_query = """
-            INSERT INTO MatchInfo (StudentEmail, TeacherEmail, MatchStatus, MatchDateTime)
+            INSERT INTO Match_Status (StudentEmail, TeacherEmail, MatchStatus, MatchDateTime)
             VALUES (%s, %s, %s, %s)
             """
 
@@ -78,13 +78,13 @@ def insert_match_info(student_email, teacher_email):
             print("Record inserted successfully into MatchInfo table")
 
     except Error as e:
-        print(f"Error while connecting to MySQL: {e}")
+        return False
 
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("MySQL connection is closed")
+            return True
 
 '''使用例
 insert_match_info("student@example.com", "teacher@example.com")
