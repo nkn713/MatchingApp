@@ -63,7 +63,7 @@ def insert_match_status(student_email, teacher_email):
 
             # 挿入クエリの作成
             insert_query = """
-            INSERT INTO Match_Status (StudentEmail, TeacherEmail, MatchStatus, MatchDateTime)
+            INSERT INTO MatchInfo (StudentEmail, TeacherEmail, MatchStatus, MatchDateTime)
             VALUES (%s, %s, %s, %s)
             """
 

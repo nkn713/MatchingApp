@@ -13,6 +13,7 @@ def register():
         email = request.form['email']
         password = request.form['password']
         user_type = request.form['user_type']
+        user_name = request.form['user_name']
         # ここで新規登録処理を実行する
 
         #追加
