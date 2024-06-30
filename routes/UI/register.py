@@ -13,11 +13,11 @@ def register():
         email = request.form['email']
         password = request.form['password']
         user_type = request.form['user_type']
-        user_name = request.form['user_name']
+        username = request.form['username'] 
         # ここで新規登録処理を実行する
 
         #追加
-        RegisterToDatabase(password,email,user_type)
+        RegisterToDatabase(password,email,user_type,username)
         #追加
         return redirect(url_for('register.login'))
 
