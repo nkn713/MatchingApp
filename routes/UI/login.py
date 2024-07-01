@@ -12,6 +12,7 @@ def login():
         # 認証ロジック
         if authenticate_user(email, user_type):
             session['email'] = email
+            session['username'] = username
             if user_type == 'student':
                 return redirect(url_for('login.student_home'))
             elif user_type == 'teacher':
@@ -26,6 +27,7 @@ def login():
 
 @login_bp.route('/student_home')
 def student_home():
+    username = session.get('username')
     if 'email' not in session:
         return redirect(url_for('login.login'))
     return render_template('S_homeview.html', email=session.get('email'))
