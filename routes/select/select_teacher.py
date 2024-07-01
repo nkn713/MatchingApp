@@ -16,7 +16,7 @@ def get_teacher_profile(teacher_id):
         cursor = conn.cursor()
 
         # SQLクエリを実行
-        query = "SELECT name, gender, affiliation, university FROM teacher_profiles WHERE id = %s"
+        query = "SELECT name, email FROM teacher_profiles WHERE id = %s"
         cursor.execute(query, (teacher_id,))
 
         # 結果を取得
@@ -44,9 +44,10 @@ else:
     print("No profile found for the given ID.")
 '''
 
-import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
+
+
 
 def insert_match_status(student_email, teacher_email):
     try:
@@ -75,16 +76,30 @@ def insert_match_status(student_email, teacher_email):
             # データの挿入
             cursor.execute(insert_query, record)
             connection.commit()
-            print("Record inserted successfully into MatchInfo table")
+
+            # 挿入されたレコードのIDを取得
+            match_id = cursor.lastrowid
+            print("Record inserted successfully into MatchInfo table with MatchID:", match_id)
+            return match_id
 
     except Error as e:
-        return False
+        print("Error while connecting to MySQL", e)
+        return None
 
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-            return True
+
+''' 使用例
+student_email = "student@example.com"
+teacher_email = "teacher@example.com"
+match_id = insert_match_status(student_email, teacher_email)
+if match_id:
+    print(f"挿入されたマッチID: {match_id}")
+else:
+    print("挿入に失敗しました")
+'''
 
 '''使用例
 insert_match_info("student@example.com", "teacher@example.com")
