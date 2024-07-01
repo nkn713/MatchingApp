@@ -41,9 +41,10 @@ def insert_match_history(student_id, teacher_id):
             print("MySQL connection is closed")
 
 # 関数の使用例
+'''
 result = insert_match_history(1, 2)
 print("Success" if result else "Failed")
-
+'''
 
 
 def update_match_history(history_id, rating, review):

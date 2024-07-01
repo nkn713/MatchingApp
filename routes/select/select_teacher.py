@@ -1,6 +1,7 @@
 #講師選択処理部
 import mysql.connector
 
+#講師のidから名前とemailを取得し、辞書の形で返す。
 def get_teacher_profile(teacher_id):
     # データベース接続の設定
     config = {
@@ -27,13 +28,14 @@ def get_teacher_profile(teacher_id):
         conn.close()
 
         if result:
-            return list(result)
+            return {'name': result[0], 'email': result[1]}
         else:
             return None
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return None
+
 
 ''' 使用例
 teacher_id = 1
@@ -48,7 +50,8 @@ from mysql.connector import Error
 from datetime import datetime
 
 
-
+#matchifoテーブルにstudent_emailとteacher_emailを登録してmatch_statusをTrueにする。戻り値はmatch_id
+#matchifoテーブルはstudent_idとteacher_idになっているため変更の必要あり。
 def insert_match_status(student_email, teacher_email):
     try:
         # データベース接続の設定
@@ -104,3 +107,5 @@ else:
 '''使用例
 insert_match_info("student@example.com", "teacher@example.com")
 '''
+
+#マッチが解除されたとき用の関数を作る必要あり。
