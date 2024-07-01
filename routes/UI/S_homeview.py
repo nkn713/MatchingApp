@@ -23,8 +23,8 @@ def profile():
 
 @homeview_bp.route('/select_date', methods=['GET', 'POST'])
 def select_date():
-    if 'username' not in session:
-        return redirect(url_for('login.login'))
+    #if 'username' not in session:
+    #    return redirect(url_for('login.login'))
     if request.method == 'POST':
         # 日時選択の処理を追加します
         return redirect(url_for('homeview_bp.select_subject'))

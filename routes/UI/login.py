@@ -6,7 +6,7 @@ login_bp = Blueprint('login', __name__)
 @login_bp.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['username']  # 'username' ではなく 'email' として指定されています
+        email = request.form['email']  # 'username' ではなく 'email' として指定されています
         user_type = request.form['user_type']
 
         # 認証ロジック
