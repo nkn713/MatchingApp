@@ -3,6 +3,12 @@ from flask import Blueprint, render_template, redirect, url_for, session, reques
 take_subject_bp = Blueprint('take_subject_bp', __name__)
 
 @take_subject_bp.route('/select_subject', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        grade = request.form['grade']
+        subject = request.form['subject']
+    return redirect(url_for('S_take_subject.select_subject'))
+
 def select_subject():
     if 'username' not in session:
         return redirect(url_for('login.login'))

@@ -65,13 +65,14 @@
         <h2>受講希望科目を選択してください</h2>
         
         <div class="toggle-buttons">
-            <button id="elementarySubjects-toggle" class="toggle-button" onclick="toggleSubjects('elementarySubjects')">小学生</button>
-            <div id="elementarySubjects" class="subjects">
-                <label><input type="checkbox" name="elementarySubjects" value="国語"> 国語</label>
-                <label><input type="checkbox" name="elementarySubjects" value="数学"> 数学</label>
-                <label><input type="checkbox" name="elementarySubjects" value="理科"> 理科</label>
-                <label><input type="checkbox" name="elementarySubjects" value="社会"> 社会</label>
-                <label><input type="checkbox" name="elementarySubjects" value="英語"> 英語</label>
+            <form action="{{ url_for('S_take_subject.register_subject') }}" method="POST">
+                <button id="elementarySubjects-toggle" class="toggle-button" onclick="toggleSubjects('elementarySubjects')">小学生</button>
+                <div id="elementarySubjects" class="subjects">
+                    <label><input type="checkbox" name="elementarySubjects" value="国語"> 国語</label>
+                    <label><input type="checkbox" name="elementarySubjects" value="数学"> 数学</label>
+                    <label><input type="checkbox" name="elementarySubjects" value="理科"> 理科</label>
+                    <label><input type="checkbox" name="elementarySubjects" value="社会"> 社会</label>
+                    <label><input type="checkbox" name="elementarySubjects" value="英語"> 英語</label>
             </div>
             
             <button id="middleSchoolSubjects-toggle" class="toggle-button" onclick="toggleSubjects('middleSchoolSubjects')">中学生</button>
@@ -102,7 +103,11 @@
                 <label><input type="checkbox" name="highSchoolSubjects" value="世界史"> 世界史</label>
             </div>
         </div>
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
         <div class="buttons">
             <button type="button" class="back-button" onclick="onBack()">戻る</button>
             <button type="button" class="complete-button" onclick="onComplete()">完了</button>

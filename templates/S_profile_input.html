@@ -54,6 +54,46 @@
                 <div class="error-message">{{ errors['grade'] }}</div>
                 {% endif %}
             </div>
+            <!-- 追加された項目 -->
+            <div>
+                <label for="preference">希望:</label><br>
+                <input type="radio" id="male_preference" name="preference" value="男性">
+                <label for="male_preference">男性</label><br>
+                <input type="radio" id="female_preference" name="preference" value="女性">
+                <label for="female_preference">女性</label><br>
+            </div>
+            <div>
+                <label for="learning_purpose">受講目的:</label><br>
+                <input type="radio" id="exam_purpose" name="learning_purpose" value="受験">
+                <label for="exam_purpose">受験</label><br>
+                <input type="radio" id="school_supplement_purpose" name="learning_purpose" value="学校補習">
+                <label for="school_supplement_purpose">学校補習</label><br>
+            </div>
+            <div>
+                <label for="desired_school_level">志望校のレベル（偏差値）:</label>
+                <input type="number" id="desired_school_level" name="desired_school_level" value="{{ form_data.get('desired_school_level', '') }}" required>
+                {% if errors.get('desired_school_level') %}
+                <div class="error-message">{{ errors['desired_school_level'] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="club_activity">部活動:</label><br>
+                <input type="radio" id="sports_club" name="club_activity" value="運動部">
+                <label for="sports_club">運動部</label><br>
+                <input type="radio" id="culture_club" name="club_activity" value="文化部">
+                <label for="culture_club">文化部</label><br>
+                <input type="radio" id="other_club" name="club_activity" value="その他">
+                <label for="other_club">その他</label><br>
+            </div>
+            <div>
+                <label for="school_type">所属学校:</label><br>
+                <input type="radio" id="private_school" name="school_type" value="私立">
+                <label for="private_school">私立</label><br>
+                <input type="radio" id="public_school" name="school_type" value="国公立">
+                <label for="public_school">国公立</label><br>
+                <input type="radio" id="other_school" name="school_type" value="その他">
+                <label for="other_school">その他</label><br>
+            </div>
             <div class="buttons">
                 <button type="button" class="back-button" onclick="location.href='/home/student_home'">戻る</button>
                 <button type="submit" class="complete-button">保存</button>

@@ -1,14 +1,33 @@
+<<<<<<< HEAD
+/* T_profile_input.css */
+=======
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
 
+<<<<<<< HEAD
+/*.container {
+    border: 1px solid black;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+}*/
+
+=======
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #808080; /* グレーの背景色 */
+<<<<<<< HEAD
+    padding: 10px 20px; /* 上下左右の余白を追加 */
+=======
     padding: 10px 20px;
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
 }
 
 .header .welcome-message {
@@ -17,7 +36,11 @@ body {
 }
 
 .header .logout-button {
+<<<<<<< HEAD
+    background: transparent; /* 背景を透明に設定 */
+=======
     background: transparent;
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
     border: 2px solid #f2f2f2; /* 白のボーダーカラー */
     padding: 10px 20px;
     font-size: 16px;
@@ -34,6 +57,9 @@ hr {
     padding: 20px;
     background-color: #fff; /* 白色の背景 */
     color: #000; /* 黒色のテキスト */
+<<<<<<< HEAD
+}
+=======
     width: 100%;
     max-width: 600px;
     margin: auto;
@@ -75,3 +101,4 @@ hr {
     cursor: pointer;
 }
 
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
