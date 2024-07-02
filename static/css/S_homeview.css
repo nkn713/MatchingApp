@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080; /* グレーの背景色 */
+    padding: 10px 20px; /* 上下左右の余白を追加 */
+}
+
+.header .welcome-message {
+    font-size: 18px;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+.header .logout-button {
+    background: transparent; /* 背景を透明に設定 */
+    border: 2px solid #f2f2f2; /* 白のボーダーカラー */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.button-container button {
+    background-color: #b0e0e6;
+    border: 2px solid #000;
+    padding: 20px 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #add8e6;
+}
+
+.start-match {
+    position: fixed;
+    left: 50%;
+    bottom: 20px; /* Adjust this value for more or less distance from the bottom */
+    transform: translateX(-50%);
+}
+
+.start-match button {
+    background-color: #ffeb3b;
+    border: 2px solid #000;
+    padding: 40px 80px;
+    font-size: 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.start-match button:hover {
+    background-color: #ffd700;
+}

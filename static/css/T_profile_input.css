@@ -1,0 +1,46 @@
+/* T_profile_input.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/*.container {
+    border: 1px solid black;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+}*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080; /* グレーの背景色 */
+    padding: 10px 20px; /* 上下左右の余白を追加 */
+}
+
+.header .welcome-message {
+    font-size: 18px;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+.header .logout-button {
+    background: transparent; /* 背景を透明に設定 */
+    border: 2px solid #f2f2f2; /* 白のボーダーカラー */
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #f2f2f2; /* 白のテキストカラー */
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.form-content {
+    padding: 20px;
+    background-color: #fff; /* 白色の背景 */
+    color: #000; /* 黒色のテキスト */
+}
