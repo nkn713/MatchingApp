@@ -22,3 +22,11 @@ def get_username(password,email,user_type):
     username = result[0]
     cur.close()
     return username
+
+def get_username(password,email,user_type):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT username FROM login WHERE password = %s AND user_type = %s AND email = %s",(password, user_type, email))
+    result = cur.fetchone()
+    username = result[0]
+    cur.close()
+    return username

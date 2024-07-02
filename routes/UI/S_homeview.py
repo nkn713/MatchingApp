@@ -28,7 +28,7 @@ def select_date():
     if request.method == 'POST':
         # 日時選択の処理を追加します
         return redirect(url_for('homeview_bp.select_subject'))
-    return render_template('S_attend_day.html')
+    return render_template('S_attend_day.html' id = session.get('id'))
 
 @homeview_bp.route('/select_subject', methods=['GET', 'POST'])
 def select_subject():
@@ -37,7 +37,7 @@ def select_subject():
     if request.method == 'POST':
         # 科目選択の処理を追加します
         return redirect(url_for('homeview_bp.select_teacher'))
-    return render_template('S_take_subject.html')
+    return render_template('S_take_subject.html' id = session.get('id'))
 
 @homeview_bp.route('/select_teacher', methods=['GET', 'POST'])
 def select_teacher():
