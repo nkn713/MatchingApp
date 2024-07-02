@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<<<<<<< HEAD
     <!-- W7 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,3 +34,66 @@
     </body>
     </html>
     
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>講師プロフィール設定</title>
+    <link rel="stylesheet" href="../static/css/T_profile_input.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
+    <hr>
+    <div class="form-content">
+        <form method="post" action="{{ url_for('T_profile_input.T_profile_input') }}">
+            <div>
+                <label for="name">名前:</label>
+                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
+                {% if errors.get('name') %}
+                <div class="error-message">{{ errors['name'] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="gender">性別:</label>
+                <select id="gender" name="gender" required>
+                    <option value="男性" {% if form_data.get('gender') == '男性' %}selected{% endif %}>男性</option>
+                    <option value="女性" {% if form_data.get('gender') == '女性' %}selected{% endif %}>女性</option>
+                    <option value="その他" {% if form_data.get('gender') == 'その他' %}selected{% endif %}>その他</option>
+                </select>
+                {% if errors.get('gender') %}
+                <div class="error-message">{{ errors['gender'] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="affiliation">所属:</label>
+                <input type="text" id="affiliation" name="affiliation" value="{{ form_data.get('affiliation', '') }}" required>
+                {% if errors.get('affiliation') %}
+                <div class="error-message">{{ errors['affiliation'] }}</div>
+                {% endif %}
+            </div>
+            <div>
+                <label for="university">大学:</label>
+                <input type="text" id="university" name="university" value="{{ form_data.get('university', '') }}" required>
+                {% if errors.get('university') %}
+                <div class="error-message">{{ errors['university'] }}</div>
+                {% endif %}
+            </div>
+            <div class="buttons">
+                <button type="button" class="back-button" onclick="location.href='/home/teacher_home'">戻る</button>
+                <button type="submit" class="complete-button">保存</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c

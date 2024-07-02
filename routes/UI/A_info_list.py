@@ -32,4 +32,8 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login.login'))
 
+<<<<<<< HEAD
 # 他のルートや機能を追加する場合はここに記述
+=======
+# 他のルートや機能を追加する場合はここに記述
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c

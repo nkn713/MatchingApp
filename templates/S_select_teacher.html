@@ -14,6 +14,7 @@
         </a>
     </div>
     <form action="{{ url_for('S_select_teacher.confirm') }}" method="post">
+<<<<<<< HEAD
         <table>
             <tr>
                 <td><img src="icon1.jpg" width="600"></td>
@@ -35,6 +36,23 @@
                 <td>講師C</td>
             </tr>
         </table>
+=======
+        <div>
+            <img src="sample1.png">
+            <input type="radio" id="teacher_1" name="selected_teacher"  checked>
+            <label for="student">講師１</label>
+        </div>
+        <div>
+            <img src="sample2.png">
+            <input type="radio" id="teacher_2" name="selected_teacher" >
+            <label for="teacher">講師２</label>
+        </div>
+        <div>
+            <img src="sample3.png">
+            <input type="radio" id="teacher_3" name="selected_teacher" >
+            <label for="admin">講師３</label>
+        </div>
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
         <button type="submit">確定</button>
     </form>
 </body>
