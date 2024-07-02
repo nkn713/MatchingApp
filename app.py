@@ -11,7 +11,7 @@ from routes.UI.S_select_teacher import S_select_teacher_bp
 from routes.UI.S_attend_day import attend_day_bp
 from routes.UI.S_take_subject import take_subject_bp
 from routes.UI.T_homeview import T_homeview_bp
-from routes.UI.T_attend_day import T_attend_day_bp
+from routes.UI.T_take_attend import T_take_attend_bp
 from routes.UI.T_take_subject import T_take_subject_bp
 from routes.UI.A_admin import admin_bp
 from routes.UI.A_info_list import admin_bp
@@ -33,7 +33,6 @@ app.register_blueprint(S_select_teacher_bp, url_prefix='/select_teacher')
 app.register_blueprint(attend_day_bp, url_prefix='/attend_day')
 app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
-app.register_blueprint(T_attend_day_bp, url_prefix='/attend_day')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(admin_bp, url_prefix='/admin')
 
@@ -54,12 +53,11 @@ app.register_blueprint(S_select_teacher_bp, url_prefix='/S_select_teacher')
 app.register_blueprint(attend_day_bp, url_prefix='/attend_day')
 app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
-app.register_blueprint(T_attend_day_bp, url_prefix='/attend_day')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(S_profile_input_bp, url_prefix='/S_profile_input')
 app.register_blueprint(T_profile_input_bp, url_prefix='/T_profile_input')
 app.register_blueprint(review_bp, url_prefix='/review')
-
+app.register_blueprint(T_take_attend_bp, url_prefix='/T_take_attend')
 if __name__ == '__main__':
     app.run(debug=True)

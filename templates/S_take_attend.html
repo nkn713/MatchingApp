@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生の受講希望設定フォーム</title>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん : 生徒用ホーム画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
+    <hr>
+    <h1>受講希望設定フォーム</h1>
+    <form action="/submit_preference" method="post">
+        <label for="student_id">学生ID:</label>
+        <input type="number" id="student_id" name="student_id" required><br><br>
+
+        <label for="subject">受講希望科目:</label>
+        <input type="text" id="subject" name="subject" required><br><br>
+
+        <label for="day">受講希望曜日:</label>
+        <select id="day" name="day" required>
+            <option value="月曜日">月曜日</option>
+            <option value="火曜日">火曜日</option>
+            <option value="水曜日">水曜日</option>
+            <option value="木曜日">木曜日</option>
+            <option value="金曜日">金曜日</option>
+            <option value="土曜日">土曜日</option>
+            <option value="日曜日">日曜日</option>
+        </select><br><br>
+
+        <label for="period">受講希望時限:</label>
+        <select id="period" name="period" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select><br><br>
+
+        <button type="submit">送信</button>
+    </form>
+</body>
+</html>

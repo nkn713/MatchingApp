@@ -4,7 +4,7 @@
     <!-- W10 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出勤可能日選択画面</title>
+    <title>講師の指導可能曜日・時限設定フォーム</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/T_attend_day.css') }}">
     <script>
         function onLogout() {
@@ -27,29 +27,29 @@
     </div>
     <h1>出勤可能科目日時選択画面</h1>
     <form action="/submit_availability" method="post">
-        <label for="teacher_id">Teacher ID:</label>
+        <label for="teacher_id">講師ID:</label>
         <input type="number" id="teacher_id" name="teacher_id" required><br><br>
 
-        <label for="subjects">Subjects (Ctrl+Click to select multiple):</label>
+        <label for="subjects">指導可能科目 (Ctrl+クリックで複数選択可能):</label>
         <select id="subjects" name="subjects" multiple required>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Physics">Physics</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Biology">Biology</option>
+            <option value="Mathematics">数学</option>
+            <option value="Physics">物理</option>
+            <option value="Chemistry">化学</option>
+            <option value="Biology">生物</option>
         </select><br><br>
 
-        <label for="days">Available Days (Ctrl+Click to select multiple):</label>
+        <label for="days">指導可能曜日 (Ctrl+クリックで複数選択可能):</label>
         <select id="days" name="days" multiple required>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
+            <option value="月曜日">月曜日</option>
+            <option value="火曜日">火曜日</option>
+            <option value="水曜日">水曜日</option>
+            <option value="木曜日">木曜日</option>
+            <option value="金曜日">金曜日</option>
+            <option value="土曜日">土曜日</option>
+            <option value="日曜日">日曜日</option>
         </select><br><br>
 
-        <label for="periods">Available Periods (Ctrl+Click to select multiple):</label>
+        <label for="periods">指導可能時限 (Ctrl+クリックで複数選択可能):</label>
         <select id="periods" name="periods" multiple required>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -61,7 +61,7 @@
             <option value="8">8</option>
         </select><br><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">送信</button>
     </form>
     <div class="schedule-note">
         ※<span>6コマ 17:00～17:50</span> <span>7コマ 18:00～18:50</span> <span>8コマ 19:00～19:50</span>
