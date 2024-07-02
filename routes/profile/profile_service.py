@@ -1,6 +1,7 @@
 from routes.profile.database_operations import save_student_profile, save_teacher_profile
 from routes.profile.error_handling import ValidationError
 
+#エラー表示モジュール
 def validate_student_profile(name, gender, affiliation, grade):
     """Validate student profile data."""
     if not isinstance(name, str) or len(name.encode('utf-8')) > 255:

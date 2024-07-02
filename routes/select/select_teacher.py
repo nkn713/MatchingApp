@@ -108,4 +108,35 @@ else:
 insert_match_info("student@example.com", "teacher@example.com")
 '''
 
-#マッチが解除されたとき用の関数を作る必要あり。
+#マッチが解除されたとき用の関数
+
+def unmatching(match_id):
+    try:
+        # データベースへの接続
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='team08',
+            password='pass08',
+            database='MATCHINGAPP'
+        )
+        cursor = conn.cursor()
+
+        # `match_status` を False に更新するクエリ
+        update_query = "UPDATE MatchInfo SET Match_status = FALSE WHERE Match_id = %s"
+        cursor.execute(update_query, (match_id,))
+
+        # 変更をコミット
+        conn.commit()
+
+        # クローズ
+        cursor.close()
+        conn.close()
+        
+        print(f"Match_id {match_id} の Match_status を False に更新しました。")
+        
+    except mysql.connector.Error as err:
+        print(f"エラー: {err}")
+
+# 使用例
+unmatching(1)
+

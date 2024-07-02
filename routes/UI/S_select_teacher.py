@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, request, redirect, url_for
 from routes.select.select_teacher import get_teacher_profile, insert_match_status
-from routes.select.send_match_emails import send_match_emails
+from routes.select.send_emails import send_match_emails
 
 S_select_teacher_bp = Blueprint('S_select_teacher', __name__)
 
