@@ -16,10 +16,17 @@ def profile():
         name = request.form['name']
         gender = request.form['gender']
         affiliation = request.form['affiliation']
+<<<<<<< HEAD
+        grade = request.form['grade']
+        # プロフィール情報をデータベースに保存するコードを追加します。
+        return redirect(url_for('T_homeview_bp.teacher_home'))
+    return render_template('T_profile_input.html')
+=======
         university = request.form['university']
         # プロフィール情報をデータベースに保存するコードを追加します。
         return redirect(url_for('T_homeview_bp.teacher_home'))
     return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
 
 @T_homeview_bp.route('/select_date', methods=['GET', 'POST'])
 def select_date():
