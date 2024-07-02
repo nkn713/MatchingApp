@@ -19,6 +19,12 @@ def profile():
         grade = request.form['grade']
         # プロフィール情報をデータベースに保存するコードを追加します。
         return redirect(url_for('homeview_bp.student_home'))
+    return render_template('S_profile_input.html')
+
+@homeview_bp.route('/select_date', methods=['GET', 'POST'])
+def select_date():
+    if 'username' not in session:
+        return redirect(url_for('login.login'))
     return render_template('S_profile_input.html', username=session.get('username'), form_data={}, errors={})
 
 @homeview_bp.route('/select_date', methods=['GET', 'POST'])
@@ -28,7 +34,7 @@ def select_date():
     if request.method == 'POST':
         # 日時選択の処理を追加します
         return redirect(url_for('homeview_bp.select_subject'))
-    return render_template('S_attend_day.html')
+    return render_template('S_attend_day.html' ,id = session.get('id'))
 
 @homeview_bp.route('/select_subject', methods=['GET', 'POST'])
 def select_subject():
@@ -37,7 +43,7 @@ def select_subject():
     if request.method == 'POST':
         # 科目選択の処理を追加します
         return redirect(url_for('homeview_bp.select_teacher'))
-    return render_template('S_take_subject.html')
+    return render_template('S_take_subject.html' id = session.get('id'))
 
 @homeview_bp.route('/select_teacher', methods=['GET', 'POST'])
 def select_teacher():

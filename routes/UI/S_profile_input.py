@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('student_prof.html')
+
+if __name__ == "__main__":
+    app.run(debug=True)
+=======
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from routes.profile.profile_service import process_student_profile
 from routes.profile.error_handling import ValidationError, handle_error
@@ -49,3 +61,4 @@ def S_profile_input():
     except Exception as e:
         flash('予期しないエラーが発生しました。', 'error')
         return render_template('S_profile_input.html', username=session.get('username'), form_data=form_data, errors={})
+>>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c

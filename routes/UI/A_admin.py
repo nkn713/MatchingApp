@@ -1,20 +1,16 @@
-# routes/A_info_list.py
+# routes/A_admin.py
 
 from flask import Blueprint, render_template, session, redirect, url_for
 
-# ブループリントの作成
-admin_bp = Blueprint('admin', __name__, template_folder='templates')
+admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/admin_home')
 def admin_home():
-    if 'username' not in session:
-        return redirect(url_for('login.login'))
+    # ここで適切な処理を実装する
     return render_template('A_homeview.html', username=session.get('username'))
 
 @admin_bp.route('/info_list')
 def info_list():
-    if 'username' not in session:
-        return redirect(url_for('login.login'))
     # ここで生徒・講師情報一覧画面の処理を実装する
     # 仮に生徒・講師情報のリストを取得する例を示す
     students = [
@@ -27,13 +23,4 @@ def info_list():
     ]
     return render_template('A_info_list.html', students=students, teachers=teachers)
 
-@admin_bp.route('/logout')
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('login.login'))
-
-<<<<<<< HEAD
-# 他のルートや機能を追加する場合はここに記述
-=======
-# 他のルートや機能を追加する場合はここに記述
->>>>>>> b51f2a9bc66494a62777f80fe89a198d7948be7c
+# 他のルートも同様に実装する
