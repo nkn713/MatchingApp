@@ -21,11 +21,11 @@ def profile():
         return redirect(url_for('homeview_bp.student_home'))
     return render_template('S_profile_input.html')
 
-@homeview_bp.route('/select_date', methods=['GET', 'POST'])
-def select_date():
-    if 'username' not in session:
-        return redirect(url_for('login.login'))
-    return render_template('S_profile_input.html', username=session.get('username'), form_data={}, errors={})
+# @homeview_bp.route('/select_date', methods=['GET', 'POST'])
+# def select_date():
+#     if 'username' not in session:
+#         return redirect(url_for('login.login'))
+#     return render_template('S_profile_input.html', username=session.get('username'), form_data={}, errors={})
 
 @homeview_bp.route('/select_date', methods=['GET', 'POST'])
 def select_date():
