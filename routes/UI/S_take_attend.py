@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for
-from routes.profile.preference import insert_or_update_preference
+from routes.profile.S_take_attend import insert_or_update_preference
 
-S_take_attend_bp = Blueprint('S_take_preference', __name__)
+S_take_attend_bp = Blueprint('S_take_attend', __name__)
 
 @S_take_attend_bp.route('/')
 def index():

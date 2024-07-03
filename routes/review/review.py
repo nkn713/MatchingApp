@@ -1,5 +1,5 @@
 # MatchingApp/routes/review/review.py
-
+'''
 from flask import Blueprint, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from MatchingApp.app import mysql
@@ -29,3 +29,5 @@ def submit_review():
     else:
         flash("You need to login first.")
         return redirect(url_for('login_bp.login'))
+
+'''
