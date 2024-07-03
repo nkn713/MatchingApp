@@ -5,7 +5,7 @@ S_take_attend_bp = Blueprint('S_take_attend', __name__)
 
 @S_take_attend_bp.route('/')
 def index():
-    return render_template('student_form.html')
+    return render_template('S_take_atted.html')
 
 @S_take_attend_bp.route('/submit_preference', methods=['POST'])
 def submit_preference():
