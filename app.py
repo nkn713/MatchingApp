@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 from routes.UI.login import login_bp  # 正しいパスを指定
 from routes.UI.login import login_bp
 from routes.UI.logout import logout_bp
-from routes.UI.S_homeview import homeview_bp
+from routes.UI.S_homeview import S_homeview_bp
 from routes.UI.S_evaluate_teacher import evaluate_bp
 from routes.UI.register import register_bp
 from routes.UI.S_select_teacher import S_select_teacher_bp
@@ -19,7 +19,6 @@ from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
 #from routes.review.review import review_bp
 from routes.UI.S_take_attend import S_take_attend_bp
-from flask_mysqldb import MySQL
 
 
 app = Flask(__name__)
@@ -27,7 +26,7 @@ app.secret_key = 'your_secret_key'
 
 app.register_blueprint(login_bp, url_prefix='/')
 app.register_blueprint(logout_bp, url_prefix='/')
-app.register_blueprint(homeview_bp, url_prefix='/home')
+app.register_blueprint(S_homeview_bp, url_prefix='/home')
 app.register_blueprint(evaluate_bp, url_prefix='/evaluate')
 app.register_blueprint(register_bp, url_prefix='/register')
 app.register_blueprint(take_subject_bp, url_prefix='/take_subject')

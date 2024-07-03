@@ -19,23 +19,20 @@
     <hr>
     <div class="button-container">
         <div class="button-row">
-            <a href="{{ url_for('homeview_bp.profile') }}">
+            <a href="{{ url_for('S_homeview.S_profile_input') }}">
                 <button>プロフィールを設定する</button>
             </a>
         </div>
         <div class="button-row">
-            <a href="{{ url_for('homeview_bp.select_date') }}">
-                <button>日時・科目を設定する</button>
+            <a href="{{ url_for('S_homeview.S_take_attend') }}">
+                <button>マッチを始める</button>
             </a>
-            <a href="{{ url_for('evaluate.evaluate_teacher') }}">
+            <a href="{{ url_for('S_homeview.S_evaluate_teacher') }}">
                 <button>講師を評価する</button>
             </a>
         </div>
     </div>
     <hr>
-    <div class="start-match">
-        <button class="start-match-button" onclick="alert('マッチを開始するボタンがクリックされました')">マッチを開始する</button>
-    </div>
     <div>
         <p>{{ result }}</p>
     </div>
