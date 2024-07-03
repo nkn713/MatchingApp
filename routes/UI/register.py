@@ -1,6 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
 register_bp = Blueprint('register',__name__)
+#追加
+from flask_mysqldb import MySQL 
+from flask import current_app
+from routes.signUp.signup import RegisterToDatabase
+#追加
+
+register_bp = Blueprint('register', __name__)
 
 @register_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -8,6 +15,8 @@ def register():
         email = request.form['email']
         password = request.form['password']
         user_type = request.form['user_type']
+        username = request.form['username'] 
+        RegisterToDatabase(password,email,user_type,username)
         session['email'] = email
         session['password'] = password
         # ここで新規登録処理を実行する
@@ -25,3 +34,4 @@ def success():
 @register_bp.route('/login')
 def login():
     return render_template('login.html')
+
