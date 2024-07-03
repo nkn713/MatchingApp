@@ -113,5 +113,5 @@ def send_unmatching_email(match_id):
         print(f'エラー: {str(e)}')
 
 # 使用例
-# send_match_emails(1)
+send_match_emails(1)
 # send_unmatching_email(1)
