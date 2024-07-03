@@ -17,8 +17,8 @@ from routes.UI.A_admin import admin_bp
 from routes.UI.A_info_list import admin_bp
 from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
-from routes.review.review import review_bp
-from routes.profile.S_take_attend import S_take_attend_bp
+#from routes.review.review import review_bp
+from routes.UI.S_take_attend import S_take_attend_bp
 from flask_mysqldb import MySQL
 
 
