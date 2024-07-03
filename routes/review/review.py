@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
-from MatchingApp.app import mysql
+from MatchingApp.app import MySQL
 
 review_bp = Blueprint('review', __name__)
 
