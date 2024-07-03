@@ -17,7 +17,7 @@ from routes.UI.A_admin import admin_bp
 from routes.UI.A_info_list import admin_bp
 from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
-from routes.review.review import review_bp
+# from routes.review.review import review_bp
 from routes.profile.S_take_attend import S_take_attend_bp
 from flask_mysqldb import MySQL
 
@@ -58,7 +58,7 @@ app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(S_profile_input_bp, url_prefix='/S_profile_input')
 app.register_blueprint(T_profile_input_bp, url_prefix='/T_profile_input')
-app.register_blueprint(review_bp, url_prefix='/review')
+# app.register_blueprint(review_bp, url_prefix='/review')
 app.register_blueprint(T_take_attend_bp, url_prefix='/T_take_attend')
 app.register_blueprint(S_take_attend_bp, url_prefix='S_take_attend')
 if __name__ == '__main__':
