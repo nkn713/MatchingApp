@@ -2,10 +2,11 @@
 
 from flask import Blueprint, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
-from MatchingApp.app import MySQL
+#from MatchingApp.app import mysql
 
 review_bp = Blueprint('review', __name__)
 
+mysql = MySQL()
 @review_bp.route('/submit_review', methods=['POST'])
 def submit_review():
     if 'student_id' in session:
