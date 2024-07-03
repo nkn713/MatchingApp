@@ -32,7 +32,7 @@ app.register_blueprint(register_bp, url_prefix='/register')
 app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
-app.register_blueprint(admin_bp, url_prefix='/admin')
+app.register_blueprint(A_homeview_bp, url_prefix='/A_homeview')
 
 #
 app.config['MYSQL_HOST'] = 'localhost'
