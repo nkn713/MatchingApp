@@ -7,7 +7,7 @@ def get_profile_id(login_id):
         host='your_host',
         user='your_user',
         password='your_password',
-        database='your_database'
+        database='your_database'#sssssss
     )
     cursor = conn.cursor()
 
