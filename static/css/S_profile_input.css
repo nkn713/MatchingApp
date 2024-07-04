@@ -1,77 +1,124 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.header {
+header {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #808080; /* グレーの背景色 */
-    padding: 10px 20px;
+    padding: 0 20px;
 }
 
-.header .welcome-message {
-    font-size: 18px;
-    color: #f2f2f2; /* 白のテキストカラー */
+header .left {
+    flex: 1;
+    text-align: left; /* 中央揃え */
+    font-size: 30px;
 }
 
-.header .logout-button {
-    background: transparent;
-    border: 2px solid #f2f2f2; /* 白のボーダーカラー */
+header .right {
+    background-color: #056725; /* ボタンの背景色 */
+    border: 2px solid #67e86c; /* ボーダーカラー */
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 25px; /* フォントサイズを調整 */
     border-radius: 10px;
     cursor: pointer;
     color: #f2f2f2; /* 白のテキストカラー */
 }
 
-hr {
-    margin: 20px 0;
+header .right button {
+    font-size: 20px; /* ボタン内のテキストサイズを調整 */
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #f2f2f2; /* 白のテキストカラー */
+    cursor: pointer;
+}
+
+header .right button:hover {
+    border: 2px solid #67e86c; /* ホバー時のボーダーカラー */
 }
 
 .form-content {
+    background-color: white;
     padding: 20px;
-    background-color: #fff; /* 白色の背景 */
-    color: #000; /* 黒色のテキスト */
-    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
     max-width: 600px;
-    margin: auto;
-    box-sizing: border-box;
+    margin-top: 20px;
 }
 
-.form-content div {
-    margin-bottom: 15px;
-    width: 100%;
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 
-.form-content label {
+.form-group label {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
     font-weight: bold;
+    color: #333;
 }
 
-.form-content input, .form-content select {
-    padding: 8px;
-    width: 200px; /* 横幅を短く設定 */
+.form-group input,
+.form-group select {
+    flex: 2;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.radio-group {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.radio-group label {
+    margin-right: 5px;
 }
 
 .buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    padding: 0 20px; /* 追加 */
 }
 
-.buttons .back-button, .buttons .complete-button {
-    background: none;
-    border: 2px solid #000;
+.back-button,
+.complete-button {
+    background-color: #333;
+    color: white;
+    border: none;
     padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
+.back-button:hover,
+.complete-button:hover {
+    background-color: #555;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
