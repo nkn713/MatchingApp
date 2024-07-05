@@ -8,12 +8,12 @@ mysql = MySQL()
 @A_homeview_bp.route('/A_info_list')
 def A_info_list():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT id, name, grade, gender, affiliation, desired_datetime, desired_subject FROM students")
+    cur.execute("SELECT id, name, email, password, gender FROM student_profiles")
     students = cur.fetchall()
-    cur.execute("SELECT id, name, grade, gender, affiliation, desired_datetime, teachable_subjects, review FROM teachers")
+    cur.execute("SELECT id, name, email, password, gender FROM teacher_profiles")
     teachers = cur.fetchall()
     cur.close()
-    return render_template('A_info_list.html', students=students, teachers=teachers, username = username)
+    return render_template('A_info_list.html', students=students, teachers=teachers)
 
 @A_homeview_bp.route('/A_matching_status')
 def A_matching_status():
@@ -21,4 +21,4 @@ def A_matching_status():
     cur.execute("SELECT * FROM  MatchInfo ")
     table_data = cur.fetchall()
     cur.close()
-    return render_template('A_matching_status.html', table_data=table_data, username = username)
+    return render_template('A_matching_status.html', table_data=table_data)
