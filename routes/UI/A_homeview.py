@@ -4,6 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 A_homeview_bp = Blueprint('A_homeview', __name__)
 
+mysql = MySQL()
 @A_homeview_bp.route('/A_info_list')
 def A_info_list():
     cur = mysql.connection.cursor()
@@ -12,5 +13,12 @@ def A_info_list():
     cur.execute("SELECT id, name, grade, gender, affiliation, desired_datetime, teachable_subjects, review FROM teachers")
     teachers = cur.fetchall()
     cur.close()
-    return render_template('A_info_list.html', students=students, teachers=teachers, username=current_user.username)
+    return render_template('A_info_list.html', students=students, teachers=teachers, username = username)
 
+@A_homeview_bp.route('/A_matching_status')
+def A_matching_status():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM  MatchInfo ")
+    table_data = cur.fetchall()
+    cur.close()
+    return render_template('A_matching_status.html', table_data=table_data, username = username)

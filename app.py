@@ -15,6 +15,7 @@ from routes.UI.T_take_attend import T_take_attend_bp
 from routes.UI.T_take_subject import T_take_subject_bp
 from routes.UI.A_homeview import A_homeview_bp
 from routes.UI.A_info_list import A_info_list_bp
+from routes.UI.A_matching_status import A_matching_status_bp
 from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
 #from routes.review.review import review_bp
@@ -33,7 +34,8 @@ app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(A_homeview_bp, url_prefix='/A_homeview')
-
+app.register_blueprint(A_info_list_bp, url_prefix='/A_info_list')
+app.register_blueprint(A_matching_status_bp, url_prefix='/matching_status')
 #
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'team08'  # データベースのユーザ名
