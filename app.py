@@ -41,6 +41,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'team08'  # データベースのユーザ名
 app.config['MYSQL_PASSWORD'] = 'pass08'  # データベースのパスワード
 app.config['MYSQL_DB'] = 'MatchingApp'  # 使用するデータベース名
+app.config['MYSQL_CHARSET'] = 'utf8mb4'
 mysql = MySQL(app)
 #
 
