@@ -15,7 +15,7 @@
     </div>
     <h1>教師選択画面</h1>
     <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
-        {% for teacher_profile in techer_profiles%}
+        {% for teacher_profile in teacher_profiles%}
         <p>{{ teacher_profile['name'] }}</p>
         {% endfor %}
         <button type="submit">確定</button>
