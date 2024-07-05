@@ -9,6 +9,9 @@ db_config = {
 }
 
 def insert_preference(student_id, subject, day, period):
+    if student_id is None or subject is None or day is None or period is None:
+        return None, "エラー: 入力された値のいずれかがNULLです。"
+
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
@@ -19,7 +22,7 @@ def insert_preference(student_id, subject, day, period):
         """, (student_id, subject, day, period))
 
         conn.commit()
-        
+
         # 挿入されたpreference_idを取得
         preference_id = cursor.lastrowid
 
@@ -30,4 +33,5 @@ def insert_preference(student_id, subject, day, period):
 
     except mysql.connector.Error as err:
         return None, f"エラー: {err}"
+
 

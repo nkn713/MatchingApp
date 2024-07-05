@@ -14,11 +14,14 @@
         </a>
     </div>
     <h1>教師選択画面</h1>
-
+    <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
         <button type="submit">確定</button>
     </form>
     <div>
         <p>{{ result_message }}</p>
+    </div> 
+    <div>
+        <p>{{ preference_id }}</p>
     </div> 
 </body>
 </html>

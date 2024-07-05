@@ -9,11 +9,13 @@ def index():
 
 @S_take_attend_bp.route('/submit_preference', methods=['POST'])
 def submit_preference():
-    student_id = get_profile_id(session.get(id))
+    student_id = get_profile_id(session.get('id'))
     subject = request.form['subject']
     day = request.form['day']
     period = request.form['period']
 
     preference_id, result_message = insert_preference(student_id, subject, day, period)
     session['preference_id'] = preference_id
-    return render_template('S_select_teacher.html', username=session.get('username'), result_message=result_message)
+
+    #ここでマッチングモジュールを使用。戻り値の講師idをS_select_teacher.pyへ渡す
+    return render_template('S_select_teacher.html', username=session.get('username'), result_message=result_message, preference_id=preference_id)
