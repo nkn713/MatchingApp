@@ -13,8 +13,8 @@ from routes.UI.S_take_subject import take_subject_bp
 from routes.UI.T_homeview import T_homeview_bp
 from routes.UI.T_take_attend import T_take_attend_bp
 from routes.UI.T_take_subject import T_take_subject_bp
-from routes.UI.A_admin import admin_bp
-from routes.UI.A_info_list import admin_bp
+from routes.UI.A_homeview import A_homeview_bp
+from routes.UI.A_info_list import A_info_list_bp
 from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
 #from routes.review.review import review_bp
