@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- W14 講師・生徒情報閲覧画面-->
+    <meta charset="UTF-8">
+    <title>生徒情報・講師情報 一覧</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>生徒情報一覧</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>MatchID</th>
+                <th>Student</th>
+                <th>Teacher</th>
+                <th>Match_status</th>
+                <th>Match_datetime</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in table_data %}
+            <tr>
+                <td>{{ row[0] }}</td>  
+                <td>{{ row[1] }}</td>  
+                <td>{{ row[2] }}</td>
+                <td>
+                    {% if row[3] %}
+                        <span class="badge badge-success">True</span>
+                    {% else %}
+                        <span class="badge badge-secondary">False</span>
+                    {% endif %}
+                </td> 
+                <td>{{ row[4] }}</td>
+                <td>
+                    {% if row[3] %}
+                        <form method="POST" action="{{url_for('A_matching_status.toggle_status', match_id=row[0]) }}">
+                            <button type="submit" class="btn btn-danger" name="action" value="toggle">解除</button>
+                        </form>
+                    {% else %}
+                        <button type="button" class="btn btn-danger" disabled>解除</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
