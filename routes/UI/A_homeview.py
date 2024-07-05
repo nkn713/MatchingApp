@@ -1,71 +1,24 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask,Blueprint, render_template, redirect, url_for, request
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-app = Flask(__name__)
+A_homeview_bp = Blueprint('A_homeview', __name__)
 
-# MySQL configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'your_password'
-app.config['MYSQL_DB'] = 'your_database_name'
-app.config['SECRET_KEY'] = 'your_secret_key'
-
-mysql = MySQL(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-class User(UserMixin):
-    def __init__(self, id, username):
-        self.id = id
-        self.username = username
-
-@login_manager.user_loader
-def load_user(user_id):
+mysql = MySQL()
+@A_homeview_bp.route('/A_info_list')
+def A_info_list():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT id, username FROM users WHERE id = %s", (user_id,))
-    user = cur.fetchone()
-    cur.close()
-    if user:
-        return User(id=user[0], username=user[1])
-    return None
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT id, username, password FROM users WHERE username = %s", (username,))
-        user = cur.fetchone()
-        cur.close()
-        if user and user[2] == password:  # Password check should be hashed in real applications
-            login_user(User(id=user[0], username=user[1]))
-            return redirect(url_for('admin'))
-    return render_template('login.html')
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
-@app.route('/')
-@login_required
-def admin():
-    return render_template('admin.html', username=current_user.username)
-
-@app.route('/info')
-@login_required
-def info():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT id, name, grade, gender, affiliation, desired_datetime, desired_subject FROM students")
+    cur.execute("SELECT id, name, email, password, gender FROM student_profiles")
     students = cur.fetchall()
-    cur.execute("SELECT id, name, grade, gender, affiliation, desired_datetime, teachable_subjects, review FROM teachers")
+    cur.execute("SELECT id, name, email, password, gender FROM teacher_profiles")
     teachers = cur.fetchall()
     cur.close()
-    return render_template('info.html', students=students, teachers=teachers, username=current_user.username)
+    return render_template('A_info_list.html', students=students, teachers=teachers)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@A_homeview_bp.route('/A_matching_status')
+def A_matching_status():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM  MatchInfo ")
+    table_data = cur.fetchall()
+    cur.close()
+    return render_template('A_matching_status.html', table_data=table_data)
