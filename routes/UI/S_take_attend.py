@@ -5,7 +5,7 @@ S_take_attend_bp = Blueprint('S_take_attend', __name__)
 
 @S_take_attend_bp.route('/')
 def index():
-    return render_template('S_take_atted.html')
+    return render_template('S_take_attend.html', form_data={}, errors={})
 
 @S_take_attend_bp.route('/submit_preference', methods=['POST'])
 def submit_preference():
@@ -15,4 +15,4 @@ def submit_preference():
     period = request.form['period']
 
     result = insert_or_update_preference(student_id, subject, day, period)
-    return render_template('S_homeview.html', result=result)
+    return render_template('S_homeview.html', result=result, form_data={}, errors={})
