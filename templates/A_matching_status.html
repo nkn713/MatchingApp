@@ -3,11 +3,17 @@
 <head>
     <!-- W14 講師・生徒情報閲覧画面-->
     <meta charset="UTF-8">
-    <title>生徒情報・講師情報 一覧</title>
+    <title>マッチング状況一覧</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん : マッチング状況一覧</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
     <h1>マッチング一覧</h1>
     <table border="1">
         <thead>
@@ -46,5 +52,9 @@
             </tr>
             {% endfor %}
     </table>
+
+    <a href="{{ url_for('A_matching_status.A_homeview') }}">
+        <button>完了</button>
+    </a>
 </body>
 </html>

@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん :生徒情報・講師情報 一覧 </div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
     <h1>生徒情報一覧</h1>
     <table border="1">
         <thead>

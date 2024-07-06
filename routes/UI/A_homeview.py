@@ -1,4 +1,4 @@
-from flask import Flask,Blueprint, render_template, redirect, url_for, request
+from flask import Flask,Blueprint, render_template, redirect, url_for, request,session
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -13,7 +13,7 @@ def A_info_list():
     cur.execute("SELECT id, name, email, password, gender FROM teacher_profiles")
     teachers = cur.fetchall()
     cur.close()
-    return render_template('A_info_list.html', students=students, teachers=teachers)
+    return render_template('A_info_list.html', students=students, teachers=teachers, username = session.get('username') ,id = session.get('id'))
 
 @A_homeview_bp.route('/A_matching_status')
 def A_matching_status():
@@ -21,4 +21,4 @@ def A_matching_status():
     cur.execute("SELECT * FROM  MatchInfo ")
     table_data = cur.fetchall()
     cur.close()
-    return render_template('A_matching_status.html', table_data=table_data)
+    return render_template('A_matching_status.html', table_data=table_data, username = session.get('username') ,id = session.get('id'))

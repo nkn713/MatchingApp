@@ -10,9 +10,10 @@
 </head>
 <body>
     <div class="header">
-        <div class="welcome-message">ようこそ 佐野 さん</div>
-        <h1>個別指導マッチングシステム 管理者用ページ</h1>
-        <button class="logout-button" onclick="onLogout()">ログアウト</button>
+        <div class="welcome-message">ようこそ {{ username }} さん : 講師用ホーム画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
     </div>
     <hr>
     <div class="button-container">

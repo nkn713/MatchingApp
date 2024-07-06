@@ -27,3 +27,7 @@ def display_matching_status():
     table_data = cur.fetchall()
     cur.close()
     return render_template('A_matching_status.html', table_data=table_data)
+
+@A_matching_status_bp.route('/A_homeview')
+def A_homeview():
+     return render_template('A_homeview.html', username = session.get('username') ,id = session.get('id'))
