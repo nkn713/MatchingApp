@@ -100,33 +100,33 @@
     </header>
     <h1>受講希望科目・日時選択画面</h1>
     <form action="/submit_preference" method="post">
-        <label for="student_id">生徒ID:</label>
+        <!--<label for="student_id">生徒ID:</label>
         <input type="number" id="student_id" name="student_id" required><br><br>
         {% if errors.get('student_id') %}
                 <div class="error-message">{{ errors['student_id'] }}</div>
-                {% endif %}
+                {% endif %}-->
 
         <label for="subjects">受講希望科目 (Ctrl+クリックで複数選択可能):</label>
         <select id="subjects" name="subjects" multiple required>
             <option value="国語">国語</option>
-            <option value="現代文">現代文</option>
+            <!--<option value="現代文">現代文</option>
             <option value="古文">古文</option>
             <option value="漢文">漢文</option>
-            <option value="算数">算数</option>
+            <option value="算数">算数</option>-->
             <option value="数学">数学</option>
-            <option value="数学Ⅰ">数学Ⅰ</option>
+            <!--<option value="数学Ⅰ">数学Ⅰ</option>
             <option value="数学Ⅱ">数学Ⅱ</option>
             <option value="数学Ⅲ">数学Ⅲ</option>
             <option value="数学A">数学A</option>
             <option value="数学B">数学B</option>
-            <option value="数学C">数学C</option>
+            <option value="数学C">数学C</option>-->
             <option value="理科">理科</option>
-            <option value="物理">物理</option>
+            <!--<option value="物理">物理</option>
             <option value="化学">化学</option>
-            <option value="生物">生物</option>
+            <option value="生物">生物</option>-->
             <option value="社会">社会</option>
-            <option value="日本史">日本史</option>
-            <option value="世界史">世界史</option>
+            <!--<option value="日本史">日本史</option>
+            <option value="世界史">世界史</option>-->
             <option value="英語">英語</option>
         </select><br><br>
         {% if errors.get('subjects') %}
@@ -177,9 +177,9 @@
         </div>
     </form>
     <div class="schedule-note">
-        ※<span>1コマ 12:00～12:50</span> <span>2コマ 11:00～11:50</span>
-        <span>3コマ 14:00～14:50</span> <span>4コマ 15:00～15:50</span> <span>5コマ 16:00～16:50</span>
-        <span>6コマ 17:00～17:50</span> <span>7コマ 18:00～18:50</span> <span>8コマ 19:00～19:50</span>
+        ※<span>1コマ 7:55～9:15</span> <span>2コマ 9:25～10:45</span>
+        <span>3コマ 10:55～12:15</span> <span>4コマ 13:10～14:30</span> <span>5コマ 14:40～16:00</span>
+        <span>6コマ 17:00～18:20</span> <span>7コマ 18:30～19:50</span> <span>8コマ 20:00～21:20</span>
     </div>
 </body>
 </html>
