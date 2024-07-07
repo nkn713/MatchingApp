@@ -13,49 +13,44 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん</div>
-        <a href="{{ url_for('logout.logout') }}">
-            <button class="logout-button">ログアウト</button>
-        </a>
-    </div>
-    <hr>
+    <header>
+        <div class="left">～ようこそ {{ username }} さん～</div>
+        <div class="right">
+            <a href="{{ url_for('logout.logout') }}">
+                <button>ログアウト</button>
+            </a>
+        </div>
+    </header>
     <div class="form-content">
         <form method="post" action="{{ url_for('T_profile_input.T_profile_input') }}">
-            <div>
-                <label for="name">名前:</label>
-                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
-                {% if errors.get('name') %}
-                <div class="error-message">{{ errors['name'] }}</div>
-                {% endif %}
-            </div>
-            <div>
+            <h2>講師プロフィール入力画面</h2>
+            <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
                     <option value="男性" {% if form_data.get('gender') == '男性' %}selected{% endif %}>男性</option>
                     <option value="女性" {% if form_data.get('gender') == '女性' %}selected{% endif %}>女性</option>
                     <option value="その他" {% if form_data.get('gender') == 'その他' %}selected{% endif %}>その他</option>
                 </select>
-                {% if errors.get('gender') %}
+                <!--{% if errors.get('gender') %}
                 <div class="error-message">{{ errors['gender'] }}</div>
-                {% endif %}
+                {% endif %}-->
             </div>
-            <div>
-                <label for="affiliation">所属:</label>
-                <input type="text" id="affiliation" name="affiliation" value="{{ form_data.get('affiliation', '') }}" required>
-                {% if errors.get('affiliation') %}
-                <div class="error-message">{{ errors['affiliation'] }}</div>
-                {% endif %}
-            </div>
-            <div>
+            <div class="form-group">
                 <label for="university">大学:</label>
-                <input type="text" id="university" name="university" value="{{ form_data.get('university', '') }}" required>
+                <input type="text" id="university" name="university" value="{{ form_data.get('university', '') }}" placeholder="例)芝浦工業大学" required>
                 {% if errors.get('university') %}
                 <div class="error-message">{{ errors['university'] }}</div>
                 {% endif %}
             </div>
+            <div class="form-group">
+                <label for="affiliation">所属:</label>
+                <input type="text" id="affiliation" name="affiliation" value="{{ form_data.get('affiliation', '') }}" placeholder="例)情報工学科" required>
+                {% if errors.get('affiliation') %}
+                <div class="error-message">{{ errors['affiliation'] }}</div>
+                {% endif %}
+            </div>
             <!-- 追加された項目 -->
-            <div>
+            <div class="form-group">
                 <label for="exam_experience">受験経験:</label><br>
                 <input type="checkbox" id="middle_school_exam" name="middle_school_exam">
                 <label for="middle_school_exam">中学受験</label><br>
@@ -67,15 +62,18 @@
                 <label for="public_university_exam">国公立大学受験</label><br>
                 <input type="checkbox" id="private_university_exam" name="private_university_exam">
                 <label for="private_university_exam">私立大学受験</label><br>
+                {% if errors.get('exam_experience') %}
+                <div class="error-message">{{ errors['exam_experience'] }}</div>
+                {% endif %}
             </div>
-            <div>
+            <div class="form-group">
                 <label for="deviation_value">偏差値:</label>
-                <input type="number" id="deviation_value" name="deviation_value" value="{{ form_data.get('deviation_value', '') }}" required>
+                <input type="number" id="deviation_value" name="deviation_value" value="{{ form_data.get('deviation_value', '') }}" placeholder="例)60" required>
                 {% if errors.get('deviation_value') %}
                 <div class="error-message">{{ errors['deviation_value'] }}</div>
                 {% endif %}
             </div>
-            <div>
+            <div class="form-group">
                 <label for="club_activity">部活動:</label><br>
                 <input type="radio" id="sports_club" name="club_activity" value="運動部">
                 <label for="sports_club">運動部</label><br>
@@ -83,23 +81,32 @@
                 <label for="culture_club">文化部</label><br>
                 <input type="radio" id="other_club" name="club_activity" value="その他">
                 <label for="other_club">その他</label><br>
+                {% if errors.get('club_activity') %}
+                <div class="error-message">{{ errors['club_activity'] }}</div>
+                {% endif %}
             </div>
-            <div>
+            <div class="form-group">
                 <label for="middle_school_type">中学校区分:</label><br>
                 <input type="radio" id="public_middle_school" name="middle_school_type" value="公立">
                 <label for="public_middle_school">公立</label><br>
                 <input type="radio" id="private_middle_school" name="middle_school_type" value="私立">
                 <label for="private_middle_school">私立</label><br>
+                {% if errors.get('middle_school_type') %}
+                <div class="error-message">{{ errors['middle_school_type'] }}</div>
+                {% endif %}
             </div>
-            <div>
+            <div class="form-group">
                 <label for="teaching_style">授業スタイル:</label><br>
                 <input type="radio" id="school_supplement" name="teaching_style" value="学校補習メイン">
                 <label for="school_supplement">学校補習メイン</label><br>
                 <input type="radio" id="exam_preparation" name="teaching_style" value="受験対策メイン">
                 <label for="exam_preparation">受験対策メイン</label><br>
+                {% if errors.get('teaching_style') %}
+                <div class="error-message">{{ errors['teaching_style'] }}</div>
+                {% endif %}
             </div>
             <div class="buttons">
-                <button type="button" class="back-button" onclick="location.href='/home/teacher_home'">戻る</button>
+                <button type="button" class="back-button" onclick="location.href='{{ url_for('T_profile_input.teacher_home') }}'">戻る</button>
                 <button type="submit" class="complete-button">保存</button>
             </div>
         </form>

@@ -24,9 +24,9 @@
     <div class="form-content">
         <form method="post" action="{{ url_for('S_profile_input.S_profile_input') }}">
             <h2>生徒プロフィール入力画面</h2>
-                {% if errors.get('name') %}
+                <!--{% if errors.get('name') %}
                 <div class="error-message">{{ errors['name'] }}</div>
-                {% endif %}
+                {% endif %}-->
             <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
@@ -34,9 +34,9 @@
                     <option value="女性" {% if form_data.get('gender') == '女性' %}selected{% endif %}>女性</option>
                     <option value="その他" {% if form_data.get('gender') == 'その他' %}selected{% endif %}>その他</option>
                 </select>
-                {% if errors.get('gender') %}
+                <!--{% if errors.get('gender') %}
                 <div class="error-message">{{ errors['gender'] }}</div>
-                {% endif %}
+                {% endif %}-->
             </div>
             <div class="form-group">
                 <label for="affiliation">学校:</label>
@@ -45,9 +45,9 @@
                     <option value="中学校" {% if form_data.get('affiliacion') == '中学校' %}selected{% endif %}>中学校</option>
                     <option value="高校" {% if form_data.get('affiliation') == '高校' %}selected{% endif %}>高校</option>
                 </select>
-                {% if errors.get('affiliation') %}
+                <!--{% if errors.get('affiliation') %}
                 <div class="error-message">{{ errors['affiliation'] }}</div>
-                {% endif %}
+                {% endif %}-->
             </div>
             <div class="form-group">
                 <label for="grade">学年:</label>
@@ -65,6 +65,9 @@
                     <input type="radio" id="female_preference" name="preference" value="女性">
                     <label for="female_preference">女性</label>
                 </div>
+                {% if errors.get('preference') %}
+                <div class="error-message">{{ errors['preference'] }}</div>
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="learning_purpose">受講目的:</label>
@@ -74,6 +77,9 @@
                     <input type="radio" id="school_supplement_purpose" name="learning_purpose" value="学校補習">
                     <label for="school_supplement_purpose">学校補習</label>
                 </div>
+                {% if errors.get('learning_purpose') %}
+                <div class="error-message">{{ errors['learning_purpose'] }}</div>
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="desired_school_level">志望校のレベル（偏差値）:</label>
@@ -92,6 +98,9 @@
                     <input type="radio" id="other_club" name="club_activity" value="その他">
                     <label for="other_club">その他</label>
                 </div>
+                {% if errors.get('club-activity') %}
+                <div class="error-message">{{ errors['club-activity'] }}</div>
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="school_type">所属学校:</label>
@@ -103,10 +112,13 @@
                 <input type="radio" id="other_school" name="school_type" value="その他">
                 <label for="other_school">その他</label>
                 </div>
+                {% if errors.get('school_type') %}
+                <div class="error-message">{{ errors['school_type'] }}</div>
+                {% endif %}
             </div>
             <div class="buttons">
-                <button type="button" class="back-button" onclick="location.href='/home/student_home'">戻る</button>
-                <button type="submit" class="complete-button">保存</button>
+                <button type="button" class="back-button" onclick="location.href='{{ url_for('S_profile_input.student_home') }}'">戻る</button>
+                <button type="submit" class="complete-button" onclick="location.href='{{ url_for('S_profile_input.S_profile_input') }}'">保存</button>
             </div>
         </form>
     </div>
