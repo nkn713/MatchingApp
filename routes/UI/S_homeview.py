@@ -15,7 +15,7 @@ def S_take_attend():
 
 @S_homeview_bp.route('/S_profile_input')
 def S_profile_input():
-    return render_template('S_profile_input.html' ,id = session.get('id'), username=session.get('username'))
+    return render_template('S_profile_input.html' ,id = session.get('id'), username=session.get('username'), form_data={}, errors={})
 
 @S_homeview_bp.route('/S_evaluate_teacher')
 def S_evaluate_teacher():

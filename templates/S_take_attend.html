@@ -15,11 +15,15 @@
     <hr>
     <h1>受講希望設定フォーム</h1>
     <form action="{{ url_for('S_take_attend.submit_preference') }}" method="post">
-        <label for="student_id">学生ID:</label>
-        <input type="number" id="student_id" name="student_id" required><br><br>
 
         <label for="subject">受講希望科目:</label>
-        <input type="text" id="subject" name="subject" required><br><br>
+        <select id="subject" name="subject" required>
+            <option value="数学">数学</option>
+            <option value="英語">英語</option>
+            <option value="国語">国語</option>
+            <option value="理科">理科</option>
+            <option value="社会">社会</option>
+        </select><br><br>
 
         <label for="day">受講希望曜日:</label>
         <select id="day" name="day" required>
