@@ -52,7 +52,7 @@ app.register_blueprint(S_profile_input_bp, url_prefix='/S_profile_input')
 app.register_blueprint(T_profile_input_bp, url_prefix='/T_profile_input')
 # app.register_blueprint(review_bp, url_prefix='/review')
 app.register_blueprint(T_take_attend_bp, url_prefix='/T_take_attend')
-# app.register_blueprint(S_take_attend_bp, url_prefix='S_take_attend')
+app.register_blueprint(S_take_attend_bp, url_prefix='/S_take_attend')
 
 if __name__ == '__main__':
     app.run(debug=True)
