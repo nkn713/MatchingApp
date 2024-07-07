@@ -1,5 +1,4 @@
 import mysql.connector
-from operator import itemgetter
 
 #マッチングの条件は以下の通り
 #・生徒の男性女性希望＆講師の性別
@@ -52,36 +51,36 @@ def calculate_match_score(student, teacher):
         score += 1
 
     # 部活動
-    if student['club_activity'] == teacher['club_activity']:
+    if student['club_activity'] == teacher['club_activities']:
         score += 1
 
     # 学校区分
     if student['grade'] > 6:
-        if student['school_type'] == '私立' and teacher['junior_high_school'] == '私立':
+        if student['school_type'] == '私立' and teacher['middle_school_type'] == '私立':
             score += 1
-        elif student['school_type'] == '国公立' and teacher['junior_high_school'] == '公立':
+        elif student['school_type'] == '国公立' and teacher['middle_school_type'] == '公立':
             score += 1
         elif student['school_type'] == 'その他':
             score += 1
 
     # 偏差値
-    if (student['target_school_level'] <= 55 and teacher['deviation_score'] <= 55) or \
-       (56 <= student['target_school_level'] <= 60 and 56 <= teacher['deviation_score'] <= 60) or \
-       (61 <= student['target_school_level'] <= 65 and 61 <= teacher['deviation_score'] <= 65) or \
-       (66 <= student['target_school_level'] and 66 <= teacher['deviation_score']):
+    if (student['target_school_level'] <= 55 and teacher['deviation_value'] <= 55) or \
+       (56 <= student['target_school_level'] <= 60 and 56 <= teacher['deviation_value'] <= 60) or \
+       (61 <= student['target_school_level'] <= 65 and 61 <= teacher['deviation_value'] <= 65) or \
+       (66 <= student['target_school_level'] and 66 <= teacher['deviation_value']):
         score += 1
 
     # 受講目的と講師の経験
     if student['purpose'] == '受験':
-        if (student['grade'] <= 6 and teacher['experience_junior_high_school'] == 'あり') or \
-           (7 <= student['grade'] <= 9 and (teacher['experience_high_school'] == '国公立' or teacher['experience_high_school'] == '私立')) or \
-           (10 <= student['grade'] and (teacher['experience_university'] == '国公立' or teacher['experience_university'] == '私立')):
+        if (student['grade'] <= 6 and teacher['exam_experience'].find('中学受験') != -1) or \
+           (7 <= student['grade'] <= 9 and (teacher['exam_experience'].find('国公立高校受験') != -1 or teacher['exam_experience'].find('私立高校受験') != -1)) or \
+           (10 <= student['grade'] and (teacher['exam_experience'].find('国公立大学受験') != -1 or teacher['exam_experience'].find('私立大学受験') != -1)):
             score += 1
 
     # 受講目的と講師の得意なスタイル
-    if student['purpose'] == '学校補習' and teacher['preferred_teaching_style'] == '学校補習メイン':
+    if student['purpose'] == '学校補習' and teacher['teaching_style'] == '学校補習メイン':
         score += 1
-    elif student['purpose'] == '受験' and teacher['preferred_teaching_style'] == '受験対策メイン':
+    elif student['purpose'] == '受験' and teacher['teaching_style'] == '受験対策メイン':
         score += 1
 
     return score
@@ -95,8 +94,8 @@ def find_best_teachers(student_id):
         score = calculate_match_score(student, teacher)
         matches.append((teacher['id'], score))
     
-    matches = sorted(matches, key=itemgetter(1), reverse=True)
-    return matches[:3]
+    matches = sorted(matches, key=lambda x: x[1], reverse=True)
+    return [teacher_id for teacher_id, score in matches[:3]]
 
 #テスト用？
 def main():
@@ -104,8 +103,8 @@ def main():
     top_teachers = find_best_teachers(student_id)
     
     print("Top 3 matching teacher IDs:")
-    for teacher_id, score in top_teachers:
-        print(f"Teacher ID: {teacher_id}, Score: {score}")
+    for teacher_id in top_teachers:
+        print(f"Teacher ID: {teacher_id}")
 
 if __name__ == '__main__':
     main()
