@@ -13,90 +13,112 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん</div>
-        <a href="{{ url_for('logout.logout') }}">
-            <button class="logout-button">ログアウト</button>
-        </a>
-    </div>
-    <hr>
+    <header>
+        <div class="left">～ようこそ {{ username }} さん～</div>
+        <div class="right">
+            <a href="{{ url_for('logout.logout') }}">
+                <button>ログアウト</button>
+            </a>
+        </div>
+    </header>
     <div class="form-content">
         <form method="post" action="{{ url_for('S_profile_input.S_profile_input') }}">
-            <div>
-                <label for="name">名前:</label>
-                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
-                {% if errors.get('name') %}
+            <h2>生徒プロフィール入力画面</h2>
+                <!--{% if errors.get('name') %}
                 <div class="error-message">{{ errors['name'] }}</div>
-                {% endif %}
-            </div>
-            <div>
+                {% endif %}-->
+            <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
                     <option value="男性" {% if form_data.get('gender') == '男性' %}selected{% endif %}>男性</option>
                     <option value="女性" {% if form_data.get('gender') == '女性' %}selected{% endif %}>女性</option>
                     <option value="その他" {% if form_data.get('gender') == 'その他' %}selected{% endif %}>その他</option>
                 </select>
-                {% if errors.get('gender') %}
+                <!--{% if errors.get('gender') %}
                 <div class="error-message">{{ errors['gender'] }}</div>
-                {% endif %}
+                {% endif %}-->
             </div>
-            <div>
-                <label for="affiliation">所属:</label>
-                <input type="text" id="affiliation" name="affiliation" value="{{ form_data.get('affiliation', '') }}" required>
-                {% if errors.get('affiliation') %}
+            <div class="form-group">
+                <label for="affiliation">学校:</label>
+                <select id="affiliation" name="affiliation" required>
+                    <option value="小学校" {% if form_data.get('affiliation') == '小学校' %}selected{% endif %}>小学校</option>
+                    <option value="中学校" {% if form_data.get('affiliacion') == '中学校' %}selected{% endif %}>中学校</option>
+                    <option value="高校" {% if form_data.get('affiliation') == '高校' %}selected{% endif %}>高校</option>
+                </select>
+                <!--{% if errors.get('affiliation') %}
                 <div class="error-message">{{ errors['affiliation'] }}</div>
-                {% endif %}
+                {% endif %}-->
             </div>
-            <div>
+            <div class="form-group">
                 <label for="grade">学年:</label>
-                <input type="text" id="grade" name="grade" value="{{ form_data.get('grade', '') }}" required>
+                <input type="text" id="grade" name="grade" value="{{ form_data.get('grade', '') }}" placeholder="例)3" required>
                 {% if errors.get('grade') %}
                 <div class="error-message">{{ errors['grade'] }}</div>
                 {% endif %}
             </div>
             <!-- 追加された項目 -->
-            <div>
-                <label for="preference">希望:</label><br>
-                <input type="radio" id="male_preference" name="preference" value="男性">
-                <label for="male_preference">男性</label><br>
-                <input type="radio" id="female_preference" name="preference" value="女性">
-                <label for="female_preference">女性</label><br>
+            <div class="form-group">
+                <label for="preference">希望:</label>
+                <div class="radio-group">
+                    <input type="radio" id="male_preference" name="preference" value="男性">
+                    <label for="male_preference">男性</label>
+                    <input type="radio" id="female_preference" name="preference" value="女性">
+                    <label for="female_preference">女性</label>
+                </div>
+                {% if errors.get('preference') %}
+                <div class="error-message">{{ errors['preference'] }}</div>
+                {% endif %}
             </div>
-            <div>
-                <label for="learning_purpose">受講目的:</label><br>
-                <input type="radio" id="exam_purpose" name="learning_purpose" value="受験">
-                <label for="exam_purpose">受験</label><br>
-                <input type="radio" id="school_supplement_purpose" name="learning_purpose" value="学校補習">
-                <label for="school_supplement_purpose">学校補習</label><br>
+            <div class="form-group">
+                <label for="learning_purpose">受講目的:</label>
+                <div class="radio-group">
+                    <input type="radio" id="exam_purpose" name="learning_purpose" value="受験">
+                    <label for="exam_purpose">受験</label>
+                    <input type="radio" id="school_supplement_purpose" name="learning_purpose" value="学校補習">
+                    <label for="school_supplement_purpose">学校補習</label>
+                </div>
+                {% if errors.get('learning_purpose') %}
+                <div class="error-message">{{ errors['learning_purpose'] }}</div>
+                {% endif %}
             </div>
-            <div>
+            <div class="form-group">
                 <label for="desired_school_level">志望校のレベル（偏差値）:</label>
-                <input type="number" id="desired_school_level" name="desired_school_level" value="{{ form_data.get('desired_school_level', '') }}" required>
+                <input type="number" id="desired_school_level" name="desired_school_level" value="{{ form_data.get('desired_school_level', '') }}" placeholder="例)60" required>
                 {% if errors.get('desired_school_level') %}
                 <div class="error-message">{{ errors['desired_school_level'] }}</div>
                 {% endif %}
             </div>
-            <div>
-                <label for="club_activity">部活動:</label><br>
-                <input type="radio" id="sports_club" name="club_activity" value="運動部">
-                <label for="sports_club">運動部</label><br>
-                <input type="radio" id="culture_club" name="club_activity" value="文化部">
-                <label for="culture_club">文化部</label><br>
-                <input type="radio" id="other_club" name="club_activity" value="その他">
-                <label for="other_club">その他</label><br>
+            <div class="form-group">
+                <label for="club_activity">部活動:</label>
+                <div class="radio-group">
+                    <input type="radio" id="sports_club" name="club_activity" value="運動部">
+                    <label for="sports_club">運動部</label>
+                    <input type="radio" id="culture_club" name="club_activity" value="文化部">
+                    <label for="culture_club">文化部</label>
+                    <input type="radio" id="other_club" name="club_activity" value="その他">
+                    <label for="other_club">その他</label>
+                </div>
+                {% if errors.get('club-activity') %}
+                <div class="error-message">{{ errors['club-activity'] }}</div>
+                {% endif %}
             </div>
-            <div>
-                <label for="school_type">所属学校:</label><br>
+            <div class="form-group">
+                <label for="school_type">所属学校:</label>
+                <div class="radio-group">
                 <input type="radio" id="private_school" name="school_type" value="私立">
-                <label for="private_school">私立</label><br>
+                <label for="private_school">私立</label>
                 <input type="radio" id="public_school" name="school_type" value="国公立">
-                <label for="public_school">国公立</label><br>
+                <label for="public_school">国公立</label>
                 <input type="radio" id="other_school" name="school_type" value="その他">
-                <label for="other_school">その他</label><br>
+                <label for="other_school">その他</label>
+                </div>
+                {% if errors.get('school_type') %}
+                <div class="error-message">{{ errors['school_type'] }}</div>
+                {% endif %}
             </div>
             <div class="buttons">
-                <button type="button" class="back-button" onclick="location.href='/home/student_home'">戻る</button>
-                <button type="submit" class="complete-button">保存</button>
+                <button type="button" class="back-button" onclick="location.href='{{ url_for('S_profile_input.student_home') }}'">戻る</button>
+                <button type="submit" class="complete-button" onclick="location.href='{{ url_for('S_profile_input.S_profile_input') }}'">保存</button>
             </div>
         </form>
     </div>
