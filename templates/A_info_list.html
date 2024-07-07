@@ -8,22 +8,50 @@
 </head>
 
 <body>
-    <h1>MySQL Table Contents</h1>
+    <h1>生徒情報一覧</h1>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Column 1</th>
-                <th>Column 2</th>
+                <th>name</th>
+                <th>email</th>
+                <th>password</th>
+                <th>gender</th>
             </tr>
         </thead>
         <tbody>
-            {% for row in table_data %}
+            {% for row in students %}
             <tr>
                 <td>{{ row[0] }}</td>  
                 <td>{{ row[1] }}</td>  
-                <td>{{ row[2] }}</td> 
-                
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td> 
+                <td>{{ row[4] }}</td> 
+                <!-- 必要な列を追加 -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>講師情報一覧</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>name</th>
+                <th>email</th>
+                <th>password</th>
+                <th>gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in teachers %}
+            <tr>
+                <td>{{ row[0] }}</td>  
+                <td>{{ row[1] }}</td>  
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td> 
+                <td>{{ row[4] }}</td> 
                 <!-- 必要な列を追加 -->
             </tr>
             {% endfor %}

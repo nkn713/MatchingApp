@@ -4,10 +4,10 @@ import mysql.connector
 def get_profile_id(login_id):
     # MySQLデータベースに接続
     conn = mysql.connector.connect(
-        host='your_host',
-        user='your_user',
-        password='your_password',
-        database='your_database'
+        host='localhost',
+        user='team08',
+        password='pass08',
+        database='MATCHINGAPP'
     )
     cursor = conn.cursor()
 

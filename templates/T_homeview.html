@@ -31,10 +31,22 @@
         </div>
     </div>
     <hr>
-    <div class="start-match">
-        <a href="{{ url_for('T_homeview.take_attend') }}">
-            <button>マッチを開始する</button>
-        </a>
+
+    <div class="button-container">
+        <div class="button-row">
+            <a href="{{ url_for('T_homeview_bp.profile') }}">
+                <button>プロフィールを設定する</button>
+            </a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('T_homeview_bp.T_take_attend') }}">
+                <button>シフトをを設定する</button>
+            </a>
+        </div>
+    </div>
+    <div>
+        <p>{{ result }}</p>
+
     </div>
 </body>
 </html>

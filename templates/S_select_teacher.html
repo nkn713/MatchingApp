@@ -7,29 +7,27 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>教師選択画面</h1>
-    <div class="right">
-        <a href="{{ url_for('S_select_teacher.back') }}"> 
-            <button class="button">科目選択画面へ戻る</button>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん : 生徒用ホーム画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
         </a>
     </div>
-    <form action="{{ url_for('S_select_teacher.confirm') }}" method="post">
-        <div>
-            <img src="sample1.png">
-            <input type="radio" id="teacher_1" name="selected_teacher"  checked>
-            <label for="student">講師１</label>
-        </div>
-        <div>
-            <img src="sample2.png">
-            <input type="radio" id="teacher_2" name="selected_teacher" >
-            <label for="teacher">講師２</label>
-        </div>
-        <div>
-            <img src="sample3.png">
-            <input type="radio" id="teacher_3" name="selected_teacher" >
-            <label for="admin">講師３</label>
-        </div>
+    <h1>教師選択</h1>
+    <h2>以下の講師とマッチングしました！</h2>
+    <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
+        {% for teacher_profile in teacher_profiles%}
+        <input type="radio" name="teacher_id" value="{{teacher_profile['id']}}">
+        <label for="teacher">{{ teacher_profile['name'] }}</label>
+        <br>
+        {% endfor %}
         <button type="submit">確定</button>
     </form>
+    <div>
+        <p>{{ result_message }}</p>
+    </div> 
+    <div>
+        <p>{{ preference_id }}</p>
+    </div> 
 </body>
 </html>

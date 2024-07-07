@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規登録</title>
     <link rel="stylesheet" href="../static/css/register.css">
-    
+
 <body>
     <div class="header">
         <div class="left">個別指導塾マッチングシステムにようこそ</div>
         <div class="right">
-            <a href="{{ url_for('register.login') }}"> 
+            <a href="{{ url_for('register.login') }}">
                 <button class="button">ログイン画面へ戻る</button>
             </a>
         </div>
@@ -36,8 +36,10 @@
                 <label for="student">生徒用</label>
                 <input type="radio" id="teacher" name="user_type" value="teacher">
                 <label for="teacher">講師用</label>
+
                 <!--<input type="radio" id="admin" name="user_type" value="admin">
                 <label for="admin">管理者用</label>-->
+
             </div>
             <button type="submit">登録</button>
         </form>
