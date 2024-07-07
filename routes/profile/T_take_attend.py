@@ -13,26 +13,20 @@ def insert_or_update_availability(teacher_id, subjects, days, periods):
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
 
-        for subject in subjects:
-            for day in days:
-                for period in periods:
-                    cursor.execute("""
-                        SELECT * FROM teacher_preferences 
-                        WHERE teacher_id = %s AND subject = %s AND preferred_day = %s AND preferred_period = %s
-                    """, (teacher_id, subject, day, period))
-                    existing_record = cursor.fetchone()
+        for day in days:
+            # 同じteacher_idとpreferred_dayのレコードを削除
+            cursor.execute("""
+                DELETE FROM teacher_preferences 
+                WHERE teacher_id = %s AND preferred_day = %s
+            """, (teacher_id, day))
 
-                    if existing_record:
-                        cursor.execute("""
-                            UPDATE teacher_preferences 
-                            SET subject = %s, preferred_day = %s, preferred_period = %s
-                            WHERE teacher_id = %s AND subject = %s AND preferred_day = %s AND preferred_period = %s
-                        """, (subject, day, period, teacher_id, subject, day, period))
-                    else:
-                        cursor.execute("""
-                            INSERT INTO teacher_preferences (teacher_id, subject, preferred_day, preferred_period)
-                            VALUES (%s, %s, %s, %s)
-                        """, (teacher_id, subject, day, period))
+            for subject in subjects:
+                for period in periods:
+                    # 新しいレコードを挿入
+                    cursor.execute("""
+                        INSERT INTO teacher_preferences (teacher_id, subject, preferred_day, preferred_period)
+                        VALUES (%s, %s, %s, %s)
+                    """, (teacher_id, subject, day, period))
 
         conn.commit()
         cursor.close()

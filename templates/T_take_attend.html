@@ -6,27 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>講師の指導可能曜日・時限設定フォーム</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/T_attend_day.css') }}">
-    <script>
-        function onLogout() {
-            window.location.href = "{{ url_for('logout.logout') }}";
-        }
 
-        function onBack() {
-            window.location.href = "{{ url_for('T_homeview_bp.teacher_home') }}";
-        }
-
-        function onComplete() {
-            window.location.href = "{{ url_for('T_homeview_bp.select_subject') }}";
-        }
-    </script>
 </head>
 <body>
     <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん</div>
-        <button class="logout-button" onclick="onLogout()">ログアウト</button>
+        <div class="welcome-message">ようこそ {{ username }} さん：出勤可能科目・日時選択画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
     </div>
-    <h1>出勤可能科目日時選択画面</h1>
-    <form action="/submit_availability" method="post">
+    <div>
+        <a href="{{ url_for('T_take_attend.back_homeview') }}">
+            <button class="home-button">ホームへもどる</button>
+        </a>
+    </div>
+    <form action="{{ url_for('T_take_attend.submit_availability') }}" method="post">
+
+        <label for="days">指導可能曜日</label>
+        <select id="days" name="days" required>
+            <option value="月曜日">月曜日</option>
+            <option value="火曜日">火曜日</option>
+            <option value="水曜日">水曜日</option>
+            <option value="木曜日">木曜日</option>
+            <option value="金曜日">金曜日</option>
+            <option value="土曜日">土曜日</option>
+            <option value="日曜日">日曜日</option>
+        </select><br><br>
 
         <label for="subjects">指導可能科目 (Ctrl+クリックで複数選択可能):</label>
         <select id="subjects" name="subjects" multiple required>
@@ -35,17 +40,6 @@
             <option value="国語">国語</option>
             <option value="理科">理科</option>
             <option value="社会">社会</option>
-        </select><br><br>
-
-        <label for="days">指導可能曜日 (Ctrl+クリックで複数選択可能):</label>
-        <select id="days" name="days" multiple required>
-            <option value="月曜日">月曜日</option>
-            <option value="火曜日">火曜日</option>
-            <option value="水曜日">水曜日</option>
-            <option value="木曜日">木曜日</option>
-            <option value="金曜日">金曜日</option>
-            <option value="土曜日">土曜日</option>
-            <option value="日曜日">日曜日</option>
         </select><br><br>
 
         <label for="periods">指導可能時限 (Ctrl+クリックで複数選択可能):</label>
@@ -59,15 +53,11 @@
             <option value="7">7</option>
             <option value="8">8</option>
         </select><br><br>
-
-        <button type="submit">送信</button>
+        <button type="submit" name="action" value="button1">別の曜日のシフトを入力する</button>
+        <button type="submit" name="action" value="button2">送信</button>
     </form>
     <div class="schedule-note">
-        ※<span>6コマ 17:00～17:50</span> <span>7コマ 18:00～18:50</span> <span>8コマ 19:00～19:50</span>
-    </div>
-    <div class="buttons">
-        <button class="back-button" onclick="onBack()">戻る</button>
-        <button class="complete-button" onclick="onComplete()">次へ</button>
+        ※<span>1コマ：07:55～09:15</span><span>2コマ：09:25～10:45</span><span>3コマ：10:55～12:15</span><span>4コマ：13:10～14:30</span><span>5コマ：14:40～16:00</span><span>6コマ：17:00～17:50</span> <span>7コマ：18:00～18:50</span> <span>8コマ：19:00～19:50</span>
     </div>
 </body>
 </html>

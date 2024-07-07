@@ -13,10 +13,13 @@
             <button class="logout-button">ログアウト</button>
         </a>
     </div>
-    <h1>教師選択画面</h1>
+    <h1>教師選択</h1>
+    <h2>以下の講師とマッチングしました！</h2>
     <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
         {% for teacher_profile in teacher_profiles%}
-        <p>{{ teacher_profile['name'] }}</p>
+        <input type="radio" name="teacher_id" value="{{teacher_profile['id']}}">
+        <label for="teacher">{{ teacher_profile['name'] }}</label>
+        <br>
         {% endfor %}
         <button type="submit">確定</button>
     </form>

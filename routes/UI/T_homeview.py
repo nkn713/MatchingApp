@@ -21,20 +21,9 @@ def profile():
         return redirect(url_for('T_homeview_bp.teacher_home'))
     return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})
 
-@T_homeview_bp.route('/select_date', methods=['GET', 'POST'])
-def select_date():
+@T_homeview_bp.route('/T_take_attend', methods=['GET', 'POST'])
+def T_take_attend():
     if 'username' not in session:
         return redirect(url_for('login.login'))
-    if request.method == 'POST':
-        # 日時選択の処理を追加します
-        return redirect(url_for('T_homeview_bp.select_subject'))
-    return render_template('T_attend_day.html')
+    return render_template('T_take_attend.html', username=session.get('username'), id=session.get('id'))
 
-@T_homeview_bp.route('/select_subject', methods=['GET', 'POST'])
-def select_subject():
-    if 'username' not in session:
-        return redirect(url_for('login.login'))
-    if request.method == 'POST':
-        # 科目選択の処理を追加します
-        return redirect(url_for('T_homeview_bp.select_date'))
-    return render_template('T_take_subject.html')

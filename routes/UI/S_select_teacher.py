@@ -10,10 +10,10 @@ def confirm():
     if request.method == 'POST':
         #ログイン情報から生徒idを取得してinser_match_statusの第一引数に代入
         student_id = session.get('id')
-        teacher_id = 1
+        teacher_id = request.form['teacher_id']
         match_id = insert_match_status(student_id, teacher_id)
-        history_id = insert_match_history(student_id, teacher_id)
-        return render_template('S_homeview.html', username=session.get('username'), match_id=match_id, history_id=history_id)
+        history = insert_match_history(student_id, teacher_id)
+        return render_template('S_homeview.html', username=session.get('username'), match_id=match_id, history=history)
     return render_template('S_select_teacher.html')
 
 @S_select_teacher_bp.route('/back')
