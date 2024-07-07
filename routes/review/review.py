@@ -8,3 +8,4 @@ review_bp = Blueprint('review_bp', __name__)
 @review_bp.route('/some_route')
 def some_route():
     return "This is a route in the review blueprint"
+

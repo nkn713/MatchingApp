@@ -7,6 +7,7 @@ evaluate_bp = Blueprint('evaluate', __name__)
 
 @evaluate_bp.route('/S_evaluate_teacher')
 def S_evaluate_teacher():
+
     student_id = session.get('id')  # セッションからstudent_idを取得
     if student_id is None:
         print("Student ID is not in session.")  # デバッグ用ログ出力

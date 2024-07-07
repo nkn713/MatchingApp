@@ -16,6 +16,7 @@
 
         <h2 class="text-center mb-4">講師を選択してください</h2>
 
+
         {% if teacher_names %}
             {% for teacher_id, teacher_name in teacher_names.items() %}
                 <p>{{ teacher_name }}</p>
@@ -29,5 +30,6 @@
             <button class="btn btn-primary" onclick="submitRatings()">完了</button>
         </div>
     </div>
+
 </body>
 </html>
