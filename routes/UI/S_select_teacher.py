@@ -24,4 +24,3 @@ def back():
 @S_select_teacher_bp.route('/S_select_teacher')
 def S_select_teacher():
     return render_template('S_select_teacher.html')
-
