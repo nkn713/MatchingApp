@@ -52,7 +52,11 @@ from datetime import datetime
 
 #matchifoテーブルにstudent_emailとteacher_emailを登録してmatch_statusをTrueにする。戻り値はmatch_id
 #matchifoテーブルはstudent_idとteacher_idになっているため変更の必要あり。
-def insert_match_status(student_email, teacher_email):
+import mysql.connector
+from mysql.connector import Error
+from datetime import datetime
+
+def insert_match_status(student_id, teacher_id):
     try:
         # データベース接続の設定
         connection = mysql.connector.connect(
@@ -67,14 +71,14 @@ def insert_match_status(student_email, teacher_email):
 
             # 挿入クエリの作成
             insert_query = """
-            INSERT INTO MatchInfo (StudentEmail, TeacherEmail, MatchStatus, MatchDateTime)
+            INSERT INTO MatchInfo (Student_id, Teacher_id, Match_status, Match_datetime)
             VALUES (%s, %s, %s, %s)
             """
 
             # クエリに渡すデータの準備
             match_status = True
             match_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            record = (student_email, teacher_email, match_status, match_date_time)
+            record = (student_id, teacher_id, match_status, match_date_time)
 
             # データの挿入
             cursor.execute(insert_query, record)

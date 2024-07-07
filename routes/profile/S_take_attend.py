@@ -8,34 +8,30 @@ db_config = {
     'database': 'MATCHINGAPP'
 }
 
-def insert_or_update_preference(student_id, subject, day, period):
+def insert_preference(student_id, subject, day, period):
+    if student_id is None or subject is None or day is None or period is None:
+        return None, "エラー: 入力された値のいずれかがNULLです。"
+
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT * FROM student_preferences 
-            WHERE student_id = %s AND subject = %s AND preferred_day = %s AND preferred_period = %s
+            INSERT INTO student_preferences (student_id, subject, preferred_day, preferred_period)
+            VALUES (%s, %s, %s, %s)
         """, (student_id, subject, day, period))
-        existing_record = cursor.fetchone()
-
-        if existing_record:
-            cursor.execute("""
-                UPDATE student_preferences 
-                SET subject = %s, preferred_day = %s, preferred_period = %s
-                WHERE student_id = %s AND subject = %s AND preferred_day = %s AND preferred_period = %s
-            """, (subject, day, period, student_id, subject, day, period))
-        else:
-            cursor.execute("""
-                INSERT INTO student_preferences (student_id, subject, preferred_day, preferred_period)
-                VALUES (%s, %s, %s, %s)
-            """, (student_id, subject, day, period))
 
         conn.commit()
+
+        # 挿入されたpreference_idを取得
+        preference_id = cursor.lastrowid
+
         cursor.close()
         conn.close()
 
-        return "データベースに正常に挿入または更新されました。"
+        return preference_id, "データベースに正常に挿入されました。"
 
     except mysql.connector.Error as err:
-        return f"エラー: {err}"
+        return None, f"エラー: {err}"
+
+
