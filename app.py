@@ -17,11 +17,11 @@ from routes.UI.A_info_list import A_info_list_bp
 from routes.UI.A_matching_status import A_matching_status_bp
 from routes.UI.S_profile_input import S_profile_input_bp
 from routes.UI.T_profile_input import T_profile_input_bp
-# from routes.review.review import review_bp
+#from routes.review.review import review_bp
 from routes.review.review import review_bp
 from routes.UI.S_take_attend import S_take_attend_bp
-
-
+from routes.UI.S_matchinfo import S_matchinfo_bp
+from routes.UI.T_matchinfo import T_matchinfo_bp
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -50,9 +50,11 @@ mysql = MySQL(app)
 app.register_blueprint(S_select_teacher_bp, url_prefix='/S_select_teacher')
 app.register_blueprint(S_profile_input_bp, url_prefix='/S_profile_input')
 app.register_blueprint(T_profile_input_bp, url_prefix='/T_profile_input')
-# app.register_blueprint(review_bp, url_prefix='/review')
+app.register_blueprint(review_bp, url_prefix='/review')
 app.register_blueprint(T_take_attend_bp, url_prefix='/T_take_attend')
 app.register_blueprint(S_take_attend_bp, url_prefix='/S_take_attend')
+app.register_blueprint(S_matchinfo_bp, url_prefix='/S_matchinfo')
+app.register_blueprint(T_matchinfo_bp, url_prefix='/T_matchinfo')
 
 if __name__ == '__main__':
     app.run(debug=True)

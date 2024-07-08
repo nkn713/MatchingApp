@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- 画面 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S_matchinfo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/T_matchinfo.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん : 講師用マッチング状況確認画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
+    <p>現在のマッチング状況です</p>
+    {% for match in match_info%}
+    <p>{{ match['date'] }}</p>
+    <p>{{ match['name'] }}</p>
+    <p>{{ match['subject'] }}</p>
+    <p>{{ match['day'] }}</p>
+    <p>{{ match['priod'] }}</p>
+    <hr>
+    {% endfor %}
+</body>
+</html>
