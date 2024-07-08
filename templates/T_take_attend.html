@@ -1,157 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- W10 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>講師の指導可能曜日・時限設定フォーム</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/T_attend_day.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/T_take_attend.css') }}">
-    <style>
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-    </style>
-    <script>
-        let availabilityCount = 1; // フォームの数をカウント
 
-        function onLogout() {
-            window.location.href = "{{ url_for('logout.logout') }}";
-        }
-
-        function onBack() {
-            window.location.href = "{{ url_for('T_profile_input.teacher_home') }}";
-        }
-
-        function onComplete() {
-            window.location.href = "{{ url_for('T_take_attend_bp.submit_availability') }}";
-        }
-
-        function addAvailabilityRow() {
-            const container = document.getElementById('availability-container');
-            const newRow = document.createElement('div');
-            newRow.className = 'availability-row';
-            availabilityCount++;
-
-            newRow.innerHTML = `
-                <label>出勤可能曜日${availabilityCount}:</label>
-                <select name="days[]" required>
-                    <option value="">--曜日を選択--</option>
-                    <option value="月曜日">月曜日</option>
-                    <option value="火曜日">火曜日</option>
-                    <option value="水曜日">水曜日</option>
-                    <option value="木曜日">木曜日</option>
-                    <option value="金曜日">金曜日</option>
-                    <option value="土曜日">土曜日</option>
-                    <option value="日曜日">日曜日</option>
-                </select>
-                {% if errors.get('days[]') %}
-                <div class="error-message">{{ errors['days[]'] }}</div>
-                {% endif %}
-                <label for="periods">指導可能時限 (Ctrl+クリックで複数選択可能):</label>
-                <select name="periods[]" multiple required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
-                {% if errors.get('periods[]') %}
-                <div class="error-message">{{ errors['periods[]'] }}</div>
-                {% endif %}
-                <button type="button" onclick="removeAvailabilityRow(this)" class="remove-button">削除</button>
-            `;
-            container.appendChild(newRow);
-        }
-
-        function removeAvailabilityRow(button) {
-            const row = button.parentElement;
-            row.remove();
-            updateAvailabilityLabels();
-        }
-
-        function updateAvailabilityLabels() {
-            const rows = document.querySelectorAll('.availability-row');
-            availabilityCount = rows.length; // 最新の数をセット
-            rows.forEach((row, index) => {
-                const label = row.querySelector('label');
-                label.textContent = `出勤可能曜日${index + 1}:`;
-            });
-        }
-    </script>
 </head>
 <body>
-    <header>
-        <div class="left">～ようこそ {{ username }} さん～</div>
-        <div class="right">
-            <a href="{{ url_for('logout.logout') }}">
-                <button>ログアウト</button>
-            </a>
-        </div>
-    </header>
-    <h1>出勤可能科目・日時選択画面</h1>
-    <form action="{{ url_for('T_take_attend_bp.submit_availability') }}" method="post">
+    <div class="header">
+        <div class="welcome-message">ようこそ {{ username }} さん：出勤可能科目・日時選択画面</div>
+        <a href="{{ url_for('logout.logout') }}">
+            <button class="logout-button">ログアウト</button>
+        </a>
+    </div>
+    <div>
+        <a href="{{ url_for('T_take_attend.back_homeview') }}">
+            <button class="home-button">ホームへもどる</button>
+        </a>
+    </div>
+    <form action="{{ url_for('T_take_attend.submit_availability') }}" method="post">
+
+        <label for="days">指導可能曜日</label>
+        <select id="days" name="days" required>
+            <option value="月曜日">月曜日</option>
+            <option value="火曜日">火曜日</option>
+            <option value="水曜日">水曜日</option>
+            <option value="木曜日">木曜日</option>
+            <option value="金曜日">金曜日</option>
+            <option value="土曜日">土曜日</option>
+            <option value="日曜日">日曜日</option>
+        </select><br><br>
+
         <label for="subjects">指導可能科目 (Ctrl+クリックで複数選択可能):</label>
         <select id="subjects" name="subjects" multiple required>
-            <option value="国語">国語</option>
             <option value="数学">数学</option>
+            <option value="英語">英語</option>
+            <option value="国語">国語</option>
             <option value="理科">理科</option>
             <option value="社会">社会</option>
-            <option value="英語">英語</option>
         </select><br><br>
-        {% if errors.get('subjects') %}
-        <div class="error-message">{{ errors['subjects'] }}</div>
-        {% endif %}
 
-        <div id="availability-container" class="availability-container">
-            <div class="availability-row">
-                <label>出勤可能曜日1:</label>
-                <select name="days[]" required>
-                    <option value="">--曜日を選択--</option>
-                    <option value="月曜日">月曜日</option>
-                    <option value="火曜日">火曜日</option>
-                    <option value="水曜日">水曜日</option>
-                    <option value="木曜日">木曜日</option>
-                    <option value="金曜日">金曜日</option>
-                    <option value="土曜日">土曜日</option>
-                    <option value="日曜日">日曜日</option>
-                </select>
-                {% if errors.get('days[]') %}
-                <div class="error-message">{{ errors['days[]'] }}</div>
-                {% endif %}
-                <label for="periods">指導可能時限 (Ctrl+クリックで複数選択可能):</label>
-                <select name="periods[]" multiple required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
-                {% if errors.get('periods[]') %}
-                <div class="error-message">{{ errors['periods[]'] }}</div>
-                {% endif %}
-                <button type="button" onclick="removeAvailabilityRow(this)" class="remove-button">削除</button>
-            </div>
-        </div>
-
-        <div class="add-button-container">
-            <button type="button" onclick="addAvailabilityRow()">曜日と時限を追加</button>
-        </div>
-        <div class="buttons">
-            <button type="button" class="back-button" onclick="onBack()">戻る</button>
-            <button type="submit" class="complete-button">送信</button>
-        </div>
+        <label for="periods">指導可能時限 (Ctrl+クリックで複数選択可能):</label>
+        <select id="periods" name="periods" multiple required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select><br><br>
+        <button type="submit" name="action" value="button1">別の曜日のシフトを入力する</button>
+        <button type="submit" name="action" value="button2">送信</button>
     </form>
     <div class="schedule-note">
-        ※<span>1コマ 7:55～9:15</span> <span>2コマ 9:25～10:45</span>
-        <span>3コマ 10:55～12:15</span> <span>4コマ 13:10～14:30</span> <span>5コマ 14:40～16:00</span>
-        <span>6コマ 17:00～18:20</span> <span>7コマ 18:30～19:50</span> <span>8コマ 20:00～21:20</span>
+        ※<span>1コマ：07:55～09:15</span><span>2コマ：09:25～10:45</span><span>3コマ：10:55～12:15</span><span>4コマ：13:10～14:30</span><span>5コマ：14:40～16:00</span><span>6コマ：17:00～17:50</span> <span>7コマ：18:00～18:50</span> <span>8コマ：19:00～19:50</span>
     </div>
 </body>
 </html>
