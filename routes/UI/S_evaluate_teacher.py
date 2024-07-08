@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash
 from routes.review.pickup_teacher import get_teacher_ids, get_teacher_names
+from routes.review.review_register import register_review
 from routes.review import mysql
 
 evaluate_bp = Blueprint('evaluate', __name__)
@@ -24,15 +25,9 @@ def submit_review(teacher_id):
     rating = request.form.get('rating')
     comment = request.form.get('comment')
 
-    with current_app.app_context():
-        try:
-            cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO reviews (student_id, teacher_id, rating, comment) VALUES (%s, %s, %s, %s)",
-                        (student_id, teacher_id, rating, comment))
-            mysql.connection.commit()
-            cur.close()
-            flash('評価が正常に送信されました。', 'success')
-        except Exception as e:
-            flash(f'評価の送信中にエラーが発生しました: {str(e)}', 'danger')
+    if register_review(student_id, teacher_id, rating, comment):
+        flash('評価が正常に送信されました。', 'success')
+    else:
+        flash('評価の送信中にエラーが発生しました。', 'danger')
 
     return redirect(url_for('evaluate.S_evaluate_teacher'))
