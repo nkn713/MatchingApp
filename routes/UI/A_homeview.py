@@ -1,6 +1,6 @@
 from flask import Flask,Blueprint, render_template, redirect, url_for, request
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+#from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 A_homeview_bp = Blueprint('A_homeview', __name__)
 

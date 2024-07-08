@@ -18,7 +18,7 @@ def T_profile_input():
     email = session.get('email')
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
-        return redirect(url_for('register.login'))
+        return redirect(url_for('login'))  # 修正: 'register.login' から 'login' に変更
 
     name = request.form['name']
     gender = request.form['gender']
