@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 画面 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S_matchinfo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/T_matchinfo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/S_matchinfo.css') }}">
 </head>
 <body>
     <div class="header">
@@ -15,13 +14,17 @@
         </a>
     </div>
     <p>現在のマッチング状況です</p>
-    {% for match in match_info%}
-    <p>{{ match['date'] }}</p>
-    <p>{{ match['name'] }}</p>
-    <p>{{ match['subject'] }}</p>
-    <p>{{ match['day'] }}</p>
-    <p>{{ match['priod'] }}</p>
+    {% for match in match_info %}
+    <p>日付: {{ match['date'] }}</p>
+    <p>名前: {{ match['name'] }}</p>
+    <p>性別: {{ match['gender'] }}</p>
+    <p>希望する性別: {{ match['preferred_gender'] }}</p>
+    <p>目的: {{ match['purpose'] }}</p>
+    <p>目標学校レベル: {{ match['target_school_level'] }}</p>
+    <p>クラブ活動: {{ match['club_activity'] }}</p>
+    <p>学校の種類: {{ match['school_type'] }}</p>
     <hr>
     {% endfor %}
+    {{match_info}}
 </body>
 </html>
