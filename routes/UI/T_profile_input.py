@@ -1,51 +1,80 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from routes.profile.profile_service import process_teacher_profile
-from routes.profile.error_handling import ValidationError, handle_error
-from routes.profile.database_operations import mysql
+import mysql.connector
 
 T_profile_input_bp = Blueprint('T_profile_input', __name__)
 
-@T_profile_input_bp.route('/teacher_home')
-def teacher_home():
-    return render_template('T_homeview.html', username=session.get('username'))
+# データベース接続の設定
+db_config = {
+    'user': 'team08',
+    'password': 'pass08',
+    'host': 'localhost',
+    'database': 'MATCHINGAPP'
+}
 
-@T_profile_input_bp.route('/profile')
-def profile():
-    return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})
-
-@T_profile_input_bp.route('/T_profile_input', methods=['POST'])
+@T_profile_input_bp.route('/profile', methods=['GET', 'POST'])
 def T_profile_input():
-    email = session.get('email')
-    if not email:
-        flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
-        return redirect(url_for('login'))  # 修正: 'register.login' から 'login' に変更
+    if request.method == 'POST':
+        name = request.form.get('name')
+        gender = request.form.get('gender')
+        university = request.form.get('university')
+        affiliation = request.form.get('affiliation')
+        exam_experience = request.form.getlist('exam_experience')
+        deviation_value = request.form.get('deviation_value')
+        club_activity = request.form.get('club_activity')
+        middle_school_type = request.form.get('middle_school_type')
+        teaching_style = request.form.get('teaching_style')
+        introduction = request.form.get('introduction')
 
-    name = request.form['name']
-    gender = request.form['gender']
-    affiliation = request.form['affiliation']
-    university = request.form['university']
-    session['name'] = name
-    session['gender'] = gender
-    session['affiliation'] = affiliation
-    session['university'] = university
-    form_data = {
-        'email': email,
-        'name': name,
-        'gender': gender,
-        'affiliation': affiliation,
-        'university': university
-    }
+        # フォームデータの検証
+        errors = {}
+        if not university:
+            errors['university'] = '大学名を入力してください。'
+        if not affiliation:
+            errors['affiliation'] = '所属を入力してください。'
+        if not deviation_value:
+            errors['deviation_value'] = '偏差値を入力してください。'
+        if not teaching_style:
+            errors['teaching_style'] = '授業スタイルを選択してください。'
 
-    errors = {}
+        if errors:
+            form_data = request.form.to_dict()
+            return render_template('T_profile_input.html', form_data=form_data, errors=errors, username=session.get('username'))
 
-    try:
-        process_teacher_profile(email, name, gender, affiliation, university)
-        flash('プロフィールが正常に保存されました。', 'success')
-        return redirect(url_for('T_profile_input.teacher_home'))
-    except ValidationError as error:
-        message, category, field_name = handle_error(error)
-        errors[field_name] = message
-        return render_template('T_profile_input.html', username=session.get('username'), form_data=form_data, errors=errors)
-    except Exception as e:
-        flash('予期しないエラーが発生しました。', 'error')
-        return render_template('T_profile_input.html', username=session.get('username'), form_data=form_data, errors={})
+        # データベースへの接続とデータの挿入・更新
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+
+            
+            # 新しいプロフィールを挿入
+            cursor.execute("""
+                INSERT INTO teacher_profiles (name, gender, university, affiliation, 
+                                             middle_school_exam, public_high_school_exam, 
+                                             private_high_school_exam, public_university_exam, 
+                                             private_university_exam, deviation_value, 
+                                             club_activity, middle_school_type, 
+                                             teaching_style, introduction)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (
+                name, gender, university, affiliation,
+                'middle_school_exam' in exam_experience,
+                'public_high_school_exam' in exam_experience,
+                'private_high_school_exam' in exam_experience,
+                'public_university_exam' in exam_experience,
+                'private_university_exam' in exam_experience,
+                deviation_value, club_activity, middle_school_type,
+                teaching_style, introduction
+            ))
+
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            flash('プロフィールが正常に保存されました。')
+            return redirect(url_for('T_homeview.teacher_home'))
+        except mysql.connector.Error as err:
+            flash(f"エラー: {err}")
+            return redirect(url_for('T_profile_input_bp.T_profile_input'))
+
+    # GETリクエストの場合はフォームを表示
+    return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})

@@ -10,6 +10,32 @@
             color: red;
             margin-top: 5px;
         }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .checkbox-item {
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .back-button, .complete-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button {
+            background-color: #f44336;
+        }
     </style>
 </head>
 <body>
@@ -24,6 +50,10 @@
     <div class="form-content">
         <form method="post" action="{{ url_for('T_profile_input.T_profile_input') }}">
             <h2>講師プロフィール入力画面</h2>
+            <div class="form-group">
+                <label for="name">名前:</label>
+                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
+            </div>
             <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
@@ -46,19 +76,30 @@
                 <div class="error-message">{{ errors['affiliation'] }}</div>
                 {% endif %}
             </div>
-            <!-- 追加された項目 -->
             <div class="form-group">
-                <label for="exam_experience">受験経験:</label><br>
-                <input type="checkbox" id="middle_school_exam" name="middle_school_exam" value="middle_school_exam" {% if 'middle_school_exam' in form_data %}checked{% endif %}>
-                <label for="middle_school_exam">中学受験</label><br>
-                <input type="checkbox" id="public_high_school_exam" name="public_high_school_exam" value="public_high_school_exam" {% if 'public_high_school_exam' in form_data %}checked{% endif %}>
-                <label for="public_high_school_exam">国公立高校受験</label><br>
-                <input type="checkbox" id="private_high_school_exam" name="private_high_school_exam" value="private_high_school_exam" {% if 'private_high_school_exam' in form_data %}checked{% endif %}>
-                <label for="private_high_school_exam">私立高校受験</label><br>
-                <input type="checkbox" id="public_university_exam" name="public_university_exam" value="public_university_exam" {% if 'public_university_exam' in form_data %}checked{% endif %}>
-                <label for="public_university_exam">国公立大学受験</label><br>
-                <input type="checkbox" id="private_university_exam" name="private_university_exam" value="private_university_exam" {% if 'private_university_exam' in form_data %}checked{% endif %}>
-                <label for="private_university_exam">私立大学受験</label><br>
+                <label for="exam_experience">受験経験:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="middle_school_exam" name="exam_experience" value="middle_school_exam" {% if 'middle_school_exam' in form_data %}checked{% endif %}>
+                        <label for="middle_school_exam">中学受験</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="public_high_school_exam" name="exam_experience" value="public_high_school_exam" {% if 'public_high_school_exam' in form_data %}checked{% endif %}>
+                        <label for="public_high_school_exam">国公立高校受験</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="private_high_school_exam" name="exam_experience" value="private_high_school_exam" {% if 'private_high_school_exam' in form_data %}checked{% endif %}>
+                        <label for="private_high_school_exam">私立高校受験</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="public_university_exam" name="exam_experience" value="public_university_exam" {% if 'public_university_exam' in form_data %}checked{% endif %}>
+                        <label for="public_university_exam">国公立大学受験</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="private_university_exam" name="exam_experience" value="private_university_exam" {% if 'private_university_exam' in form_data %}checked{% endif %}>
+                        <label for="private_university_exam">私立大学受験</label>
+                    </div>
+                </div>
                 {% if errors.get('exam_experience') %}
                 <div class="error-message">{{ errors['exam_experience'] }}</div>
                 {% endif %}
@@ -76,21 +117,13 @@
                 <label for="sports_club">運動部</label><br>
                 <input type="radio" id="culture_club" name="club_activity" value="文化部" {% if form_data.get('club_activity') == '文化部' %}checked{% endif %}>
                 <label for="culture_club">文化部</label><br>
-                <input type="radio" id="other_club" name="club_activity" value="その他" {% if form_data.get('club_activity') == 'その他' %}checked{% endif %}>
-                <label for="other_club">その他</label><br>
-                {% if errors.get('club_activity') %}
-                <div class="error-message">{{ errors['club_activity'] }}</div>
-                {% endif %}
             </div>
             <div class="form-group">
-                <label for="middle_school_type">中学校区分:</label><br>
-                <input type="radio" id="public_middle_school" name="middle_school_type" value="公立" {% if form_data.get('middle_school_type') == '公立' %}checked{% endif %}>
-                <label for="public_middle_school">公立</label><br>
-                <input type="radio" id="private_middle_school" name="middle_school_type" value="私立" {% if form_data.get('middle_school_type') == '私立' %}checked{% endif %}>
-                <label for="private_middle_school">私立</label><br>
-                {% if errors.get('middle_school_type') %}
-                <div class="error-message">{{ errors['middle_school_type'] }}</div>
-                {% endif %}
+                <label for="middle_school_type">中学校の種類:</label>
+                <select id="middle_school_type" name="middle_school_type" required>
+                    <option value="公立" {% if form_data.get('middle_school_type') == '公立' %}selected{% endif %}>公立</option>
+                    <option value="私立" {% if form_data.get('middle_school_type') == '私立' %}selected{% endif %}>私立</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="teaching_style">授業スタイル:</label><br>
@@ -102,12 +135,18 @@
                 <div class="error-message">{{ errors['teaching_style'] }}</div>
                 {% endif %}
             </div>
+            <div class="form-group">
+                <label for="introduction">自己紹介:</label>
+                <textarea id="introduction" name="introduction" rows="4">{{ form_data.get('introduction', '') }}</textarea>
+                {% if errors.get('introduction') %}
+                <div class="error-message">{{ errors['introduction'] }}</div>
+                {% endif %}
+            </div>
             <div class="buttons">
-                <button type="button" class="back-button" onclick="location.href='{{ url_for('T_profile_input.teacher_home') }}'">戻る</button>
+                <button type="button" class="back-button" onclick="location.href='{{ url_for('T_homeview.teacher_home') }}'">戻る</button> 
                 <button type="submit" class="complete-button">保存</button>
             </div>
         </form>
     </div>
 </body>
 </html>
-
