@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import mysql.connector
 
-T_profile_input_bp = Blueprint('T_profile_input', __name__)
+T_profile_input_bp = Blueprint('T_profile_input_bp', __name__)
 
 # データベース接続の設定
 db_config = {
@@ -45,7 +45,6 @@ def T_profile_input():
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
 
-            
             # 新しいプロフィールを挿入
             cursor.execute("""
                 INSERT INTO teacher_profiles (name, gender, university, affiliation, 
@@ -72,9 +71,14 @@ def T_profile_input():
 
             flash('プロフィールが正常に保存されました。')
             return redirect(url_for('T_homeview.teacher_home'))
+
         except mysql.connector.Error as err:
             flash(f"エラー: {err}")
             return redirect(url_for('T_profile_input_bp.T_profile_input'))
 
     # GETリクエストの場合はフォームを表示
     return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})
+
+@T_profile_input_bp.route('/teacher_home')
+def teacher_home():
+    return render_template('T_homeview.html', username=session.get('username'))
