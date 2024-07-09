@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
-T_homeview_bp = Blueprint('T_homeview_bp', __name__)
+T_homeview_bp = Blueprint('T_homeview', __name__)
 
 @T_homeview_bp.route('/teacher_home')
 def teacher_home():
