@@ -1,5 +1,7 @@
 # reviewボタンを押されたら、1-5の間で選択できるボタンとコメントを書き込めるテキストボックスを表示し、更新ボタンを押されたらデータが挿入されるようにしてください
 
+# アコーディオンメニューの実装
+
 # routes/review/review.py
 from flask import Blueprint
 
