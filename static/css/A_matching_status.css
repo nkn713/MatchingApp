@@ -9,7 +9,7 @@ body {
     margin-top: 20px;
 }
 
-h1, h2 {
+h1 {
     color: #343a40;
     text-align: center;
     margin-bottom: 20px;
@@ -36,17 +36,6 @@ h1, h2 {
     background-color: #f2f2f2;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
 .btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
@@ -58,21 +47,10 @@ h1, h2 {
     border-color: #bd2130;
 }
 
-.d-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.badge-success {
+    background-color: #28a745;
 }
 
-.btn-group-vertical {
-    display: flex;
-    flex-direction: column;
-}
-
-.btn-group-vertical .btn {
-    margin-bottom: 10px;
-}
-
-.table td {
-    white-space: nowrap;
+.badge-secondary {
+    background-color: #6c757d;
 }
