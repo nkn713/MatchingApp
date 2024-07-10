@@ -40,7 +40,8 @@ app.register_blueprint(A_homeview_bp, url_prefix='/A_homeview')
 app.register_blueprint(A_info_list_bp, url_prefix='/A_info_list')
 app.register_blueprint(A_matching_status_bp, url_prefix='/matching_status')
 #
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = '160.16.141.77'
+app.config['MYSQL_PORT'] = 50800
 app.config['MYSQL_USER'] = 'team08'  # データベースのユーザ名
 app.config['MYSQL_PASSWORD'] = 'pass08'  # データベースのパスワード
 app.config['MYSQL_DB'] = 'MatchingApp'  # 使用するデータベース名
