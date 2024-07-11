@@ -33,7 +33,6 @@ app.register_blueprint(logout_bp, url_prefix='/')
 app.register_blueprint(S_homeview_bp, url_prefix='/home')
 app.register_blueprint(evaluate_bp, url_prefix='/evaluate')
 app.register_blueprint(register_bp, url_prefix='/register')
-app.register_blueprint(take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(T_homeview_bp, url_prefix='/T_homeview')
 app.register_blueprint(T_take_subject_bp, url_prefix='/take_subject')
 app.register_blueprint(A_homeview_bp, url_prefix='/A_homeview')
@@ -52,6 +51,7 @@ mysql = MySQL(app)
 # データベースの初期化
 init_app(app)
 
+app.register_blueprint(attend_day_bp, url_prefix='/S_attend_day') 
 app.register_blueprint(S_select_teacher_bp, url_prefix='/S_select_teacher')
 app.register_blueprint(S_profile_input_bp, url_prefix='/profile_input')
 app.register_blueprint(T_profile_input_bp, url_prefix='/T_profile_input')
@@ -61,6 +61,7 @@ app.register_blueprint(S_take_attend_bp, url_prefix='/S_take_attend')
 app.register_blueprint(S_matchinfo_bp, url_prefix='/S_matchinfo')
 app.register_blueprint(T_matchinfo_bp, url_prefix='/T_matchinfo')
 app.register_blueprint(matching_bp, url_prefix='/matching')
+app.register_blueprint(take_subject_bp, url_prefix='/S_take_subject') 
 
 if __name__ == '__main__':
     app.run(debug=True)

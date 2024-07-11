@@ -17,10 +17,12 @@ def get_teacher_profiles(teacher_ids):
             # SQLクエリの作成
             format_strings = ','.join(['%s'] * len(teacher_ids))
             query = f"SELECT * FROM teacher_profiles WHERE id IN ({format_strings})"
+            print(f"Executing query: {query} with IDs: {teacher_ids}")
 
             # クエリの実行
             cursor.execute(query, tuple(teacher_ids))
             result = cursor.fetchall()
+            print(f"Query result: {result}")
 
             return result
 
@@ -32,13 +34,3 @@ def get_teacher_profiles(teacher_ids):
         if connection.is_connected():
             cursor.close()
             connection.close()
-
-# 教師IDのリスト
-#teacher_ids = [1, 2, 3]
-
-# 教師プロフィールの取得
-#profiles = get_teacher_profiles(teacher_ids)
-
-# 教師の名前を取得して表示
-#teacher_names = [profile['name'] for profile in profiles]
-#print(teacher_names)

@@ -1,6 +1,6 @@
 import mysql.connector
 
-#ログインIDからプロフィールIDを取得する関数
+# ログインIDからプロフィールIDを取得する関数
 def get_profile_id(login_id):
     # MySQLデータベースに接続
     conn = mysql.connector.connect(
@@ -15,6 +15,7 @@ def get_profile_id(login_id):
         # ログインIDからemailとuser_typeを取得
         cursor.execute("SELECT email, user_type FROM login WHERE id = %s", (login_id,))
         result = cursor.fetchone()
+        print(f"Login query result: {result}")
 
         if result is None:
             return None
@@ -24,12 +25,14 @@ def get_profile_id(login_id):
         # user_typeに基づいて適切なプロフィールIDを取得
         if user_type == 'student':
             cursor.execute("SELECT id FROM student_profiles WHERE email = %s", (email,))
+            profile_result = cursor.fetchone()
         elif user_type == 'teacher':
             cursor.execute("SELECT id FROM teacher_profiles WHERE email = %s", (email,))
+            profile_result = cursor.fetchone()
         else:
             return None
 
-        profile_result = cursor.fetchone()
+        print(f"Profile query result: {profile_result}")
 
         if profile_result is None:
             return None
@@ -40,8 +43,3 @@ def get_profile_id(login_id):
     finally:
         cursor.close()
         conn.close()
-
-# 例として、ログインID 1 のプロフィールIDを取得
-#login_id = 1
-#profile_id = get_profile_id(login_id)
-#print(f'Profile ID: {profile_id}')
