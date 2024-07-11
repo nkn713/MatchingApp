@@ -2,12 +2,13 @@ from flask import Blueprint, request, render_template, redirect, url_for, sessio
 from routes.profile.S_take_attend import insert_preference
 from routes.get_info.get_some_id import get_profile_id
 from routes.get_info.get_teacher_profiles import get_teacher_profiles
+from routes.matching.matcher import find_best_teachers
 
 S_take_attend_bp = Blueprint('S_take_attend_bp', __name__)
 
 @S_take_attend_bp.route('/')
 def index():
-    return render_template('S_take_attend.html')
+    return render_template('S_take_attend.html', username=session.get('username'))
 
 @S_take_attend_bp.route('/submit_preference', methods=['POST'])
 def submit_preference():
@@ -25,7 +26,8 @@ def submit_preference():
         session['preference_id'] = preference_id
 
         # ここでマッチングモジュールを使用。戻り値の講師idをS_select_teacher.pyへ渡す
-        teacher_ids = [1, 2, 3]
+        #2024/7/12現在，マッチングモジュールが値を返さないため，動作不能
+        teacher_ids = find_best_teachers(student_id)
         teacher_profiles = get_teacher_profiles(teacher_ids)
         return render_template('S_select_teacher.html', username=session.get('username'), teacher_profiles=teacher_profiles, result_message=result_message, preference_id=preference_id)
     except Exception as e:
