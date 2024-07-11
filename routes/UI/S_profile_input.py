@@ -1,4 +1,3 @@
-# routes/UI/S_profile_input.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from routes.profile.profile_service1 import process_student_profile
 from routes.profile.error_handling import ValidationError, handle_error
@@ -16,12 +15,15 @@ def profile():
 @S_profile_input_bp.route('/S_profile_input', methods=['POST'])
 def S_profile_input():
     email = session.get('email')
+    name = session.get('name')  # セッションから名前を取得
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
         return redirect(url_for('register.login'))
+    if not name:
+        flash('セッションに名前がありません。再度ログインしてください。', 'error')
+        return redirect(url_for('register.login'))
 
     try:
-        name = request.form['name']
         gender = request.form['gender']
         preferred_gender = request.form['preference']
         purpose = request.form['learning_purpose']
@@ -33,7 +35,6 @@ def S_profile_input():
         flash(f'フォームに不足しているフィールドがあります: {e}', 'error')
         return redirect(url_for('S_profile_input.profile'))
 
-    session['name'] = name
     session['gender'] = gender
     form_data = {
         'email': email,

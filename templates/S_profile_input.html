@@ -70,13 +70,7 @@
     <div class="form-content">
         <form method="post" action="{{ url_for('S_profile_input.S_profile_input') }}">
             <h2>生徒プロフィール入力画面</h2>
-            <div class="form-group">
-                <label for="name">名前:</label>
-                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
-                {% if errors.get('name') %}
-                <div class="error-message">{{ errors['name'] }}</div>
-                {% endif %}
-            </div>
+            <!-- 名前の部分を削除 -->
             <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>

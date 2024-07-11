@@ -6,7 +6,7 @@ def get_db():
         g.db = mysql.connector.connect(
             host='localhost',
             user='team08',   # MySQLユーザー名
-            password='pass08',  # MySQL rootユーザーのパスワード
+            password='pass08',  # MySQLユーザーのパスワード
             database='matchingapp'  # データベース名
         )
     return g.db

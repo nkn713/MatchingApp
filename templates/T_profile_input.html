@@ -51,10 +51,6 @@
         <form method="post" action="{{ url_for('T_profile_input_bp.T_profile_input') }}">
             <h2>講師プロフィール入力画面</h2>
             <div class="form-group">
-                <label for="name">名前:</label>
-                <input type="text" id="name" name="name" value="{{ form_data.get('name', '') }}" required>
-            </div>
-            <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
                     <option value="男性" {% if form_data.get('gender') == '男性' %}selected{% endif %}>男性</option>

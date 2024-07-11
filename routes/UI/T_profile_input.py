@@ -1,20 +1,18 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-import mysql.connector
+from routes.profile.profile_service1 import process_teacher_profile
+from routes.profile.error_handling import ValidationError, handle_error
 
 T_profile_input_bp = Blueprint('T_profile_input_bp', __name__)
 
-# データベース接続の設定
-db_config = {
-    'user': 'team08',
-    'password': 'pass08',
-    'host': 'localhost',
-    'database': 'MATCHINGAPP'
-}
-
 @T_profile_input_bp.route('/profile', methods=['GET', 'POST'])
 def T_profile_input():
+    email = session.get('email')
+    name = session.get('username')  # セッションから名前を取得
+    if not email:
+        flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
+        return redirect(url_for('register.login'))
+
     if request.method == 'POST':
-        name = request.form.get('name')
         gender = request.form.get('gender')
         university = request.form.get('university')
         affiliation = request.form.get('affiliation')
@@ -40,41 +38,29 @@ def T_profile_input():
             form_data = request.form.to_dict()
             return render_template('T_profile_input.html', form_data=form_data, errors=errors, username=session.get('username'))
 
-        # データベースへの接続とデータの挿入・更新
+        middle_school_exam = 'middle_school_exam' in exam_experience
+        public_high_school_exam = 'public_high_school_exam' in exam_experience
+        private_high_school_exam = 'private_high_school_exam' in exam_experience
+        public_university_exam = 'public_university_exam' in exam_experience
+        private_university_exam = 'private_university_exam' in exam_experience
+
         try:
-            conn = mysql.connector.connect(**db_config)
-            cursor = conn.cursor()
+            # exam_experience を文字列に変換
+            exam_experience_str = ','.join(exam_experience)
 
-            # 新しいプロフィールを挿入
-            cursor.execute("""
-                INSERT INTO teacher_profiles (name, gender, university, affiliation, 
-                                             middle_school_exam, public_high_school_exam, 
-                                             private_high_school_exam, public_university_exam, 
-                                             private_university_exam, deviation_value, 
-                                             club_activity, middle_school_type, 
-                                             teaching_style, introduction)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                name, gender, university, affiliation,
-                'middle_school_exam' in exam_experience,
-                'public_high_school_exam' in exam_experience,
-                'private_high_school_exam' in exam_experience,
-                'public_university_exam' in exam_experience,
-                'private_university_exam' in exam_experience,
-                deviation_value, club_activity, middle_school_type,
-                teaching_style, introduction
-            ))
-
-            conn.commit()
-            cursor.close()
-            conn.close()
-
-            flash('プロフィールが正常に保存されました。')
-            return redirect(url_for('T_homeview.teacher_home'))
-
-        except mysql.connector.Error as err:
-            flash(f"エラー: {err}")
-            return redirect(url_for('T_profile_input_bp.T_profile_input'))
+            process_teacher_profile(
+                email, name, gender, exam_experience_str, deviation_value, club_activity,
+                middle_school_type, teaching_style, introduction, ''
+            )
+            flash('プロフィールが正常に保存されました。', 'success')
+            return redirect(url_for('T_profile_input_bp.teacher_home'))
+        except ValidationError as error:
+            message, category, field_name = handle_error(error)
+            errors[field_name] = message
+            return render_template('T_profile_input.html', username=session.get('username'), form_data=request.form.to_dict(), errors=errors)
+        except Exception as e:
+            flash(f'予期しないエラーが発生しました: {e}', 'error')
+            return render_template('T_profile_input.html', username=session.get('username'), form_data=request.form.to_dict(), errors={})
 
     # GETリクエストの場合はフォームを表示
     return render_template('T_profile_input.html', username=session.get('username'), form_data={}, errors={})
