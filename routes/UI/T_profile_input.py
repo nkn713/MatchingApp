@@ -8,6 +8,7 @@ T_profile_input_bp = Blueprint('T_profile_input_bp', __name__)
 def T_profile_input():
     email = session.get('email')
     name = session.get('username')  # セッションから名前を取得
+    password = session.get('password')  # セッションからパスワードを取得
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
         return redirect(url_for('register.login'))
@@ -38,6 +39,10 @@ def T_profile_input():
             form_data = request.form.to_dict()
             return render_template('T_profile_input.html', form_data=form_data, errors=errors, username=session.get('username'))
 
+        # exam_experience がリストであることを確認
+        if not isinstance(exam_experience, list):
+            exam_experience = []
+
         middle_school_exam = 'middle_school_exam' in exam_experience
         public_high_school_exam = 'public_high_school_exam' in exam_experience
         private_high_school_exam = 'private_high_school_exam' in exam_experience
@@ -50,7 +55,7 @@ def T_profile_input():
 
             process_teacher_profile(
                 email, name, gender, exam_experience_str, deviation_value, club_activity,
-                middle_school_type, teaching_style, introduction, ''
+                middle_school_type, teaching_style, introduction, password
             )
             flash('プロフィールが正常に保存されました。', 'success')
             return redirect(url_for('T_profile_input_bp.teacher_home'))
