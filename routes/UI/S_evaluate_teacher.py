@@ -9,14 +9,24 @@ evaluate_bp = Blueprint('evaluate', __name__)
 
 @evaluate_bp.route('/S_evaluate_teacher')
 def S_evaluate_teacher():
-    student_id = session.get('id')
-    if student_id is None:
+    username = request.args.get('username')
+    if not username:
         return redirect(url_for('login.login'))
+
+    with mysql.connection.cursor() as cur:
+        cur.execute("SELECT id FROM student_profiles WHERE name = %s", (username,))
+        result = cur.fetchone()
+        if not result:
+            return redirect(url_for('login.login'))
+        student_id = result[0]
+
+    session['id'] = student_id
+    session['username'] = username
 
     teacher_ids = get_teacher_ids(student_id)
     teacher_names = get_teacher_names(teacher_ids)
 
-    return render_template('S_evaluate_teacher.html', username=session.get('username'), teacher_names=teacher_names)
+    return render_template('S_evaluate_teacher.html', username=username, teacher_names=teacher_names)
 
 @evaluate_bp.route('/submit_review/<int:teacher_id>', methods=['POST'])
 def submit_review(teacher_id):

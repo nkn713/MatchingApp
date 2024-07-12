@@ -1,15 +1,11 @@
 <!-- MatchingApp/templates/S_homeview.html -->
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- W3 生徒用ホーム画面 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生徒用ホーム画面</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/S_homeview.css') }}">
-
 </head>
 <body>
     <div class="header">
@@ -29,7 +25,7 @@
             <a href="{{ url_for('S_homeview.S_take_attend') }}">
                 <button>マッチを始める</button>
             </a>
-            <a href="{{ url_for('evaluate.S_evaluate_teacher') }}">
+            <a href="{{ url_for('evaluate.S_evaluate_teacher', username=username) }}">
                 <button>講師を評価する</button>
             </a>
         </div>
