@@ -16,7 +16,7 @@ from routes.UI.A_homeview import A_homeview_bp
 from routes.UI.A_info_list import A_info_list_bp
 from routes.UI.A_matching_status import A_matching_status_bp
 from routes.UI.S_profile_input import S_profile_input_bp
-from routes.profile.database_operations1 import init_app
+from routes.profile.database_operations1 import init_app   
 from routes.UI.T_profile_input import T_profile_input_bp
 #from routes.review.review import review_bp
 from routes.review.review import review_bp
