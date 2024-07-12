@@ -78,56 +78,6 @@ select {
     width: calc(100% - 22px);
 }
 
-/* 可用性の列スタイル */
-.availability-container {
-    margin-bottom: 20px;
-}
-
-.availability-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.availability-row label,
-.availability-row select,
-.availability-row button {
-    margin-left: 10px;
-}
-
-/* ボタンスタイル */
-.remove-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.remove-button:hover {
-    background-color: #ff6666;
-}
-
-.add-button-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.add-button-container button {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.add-button-container button:hover {
-    background-color: #555;
-}
-
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -149,10 +99,8 @@ select {
     background-color: #555;
 }
 
-/* スケジュールノート */
-.schedule-note {
-    text-align: center;
-    margin-top: 20px;
-    color: #333;
-    font-size: 14px;
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9rem;
 }

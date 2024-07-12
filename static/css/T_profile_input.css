@@ -85,6 +85,14 @@ h2 {
     border-radius: 5px;
 }
 
+.form-group textarea {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 150px; /* 最小高さを指定して、テキストエリアを大きくします */
+}
+
 .radio-group {
     flex: 2;
     display: flex;
