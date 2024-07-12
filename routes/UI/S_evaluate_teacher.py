@@ -42,4 +42,5 @@ def submit_review(teacher_id):
     else:
         flash('評価の送信中にエラーが発生しました。', 'danger')
 
-    return redirect(url_for('evaluate.S_evaluate_teacher'))
+    # ここを修正して、評価が成功した場合は同じ画面に留まるようにする
+    return redirect(request.referrer)
