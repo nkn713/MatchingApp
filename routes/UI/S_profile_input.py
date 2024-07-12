@@ -19,7 +19,6 @@ def S_profile_input():
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
         return redirect(url_for('register.login'))
-
     try:
         name = request.form['name']
         gender = request.form['gender']
@@ -29,6 +28,7 @@ def S_profile_input():
         club_activity = request.form['club_activity']
         school_type = request.form['school_type']
         print(f"Form Data: {request.form}")  # ここでフォームデータを出力して確認する
+        
     except KeyError as e:
         flash(f'フォームに不足しているフィールドがあります: {e}', 'error')
         return redirect(url_for('S_profile_input.profile'))
