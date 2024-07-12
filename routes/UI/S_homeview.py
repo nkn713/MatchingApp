@@ -1,3 +1,5 @@
+# MatchingApp/routes/UI/S_homeview.py
+
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
 S_homeview_bp = Blueprint('S_homeview', __name__)
