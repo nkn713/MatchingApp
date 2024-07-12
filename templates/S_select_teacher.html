@@ -20,7 +20,9 @@
         {% for teacher_profile in teacher_profiles%}
         <input type="radio" name="teacher_id" value="{{teacher_profile['id']}}">
         <label for="teacher">{{ teacher_profile['name'] }}</label>
-        <br>
+        <p>{{ teacher_profile['gender'] }}</p>
+        <p>{{ teacher_profile['club_activities'] }}</p>
+        <p>{{ teacher_profile['introduction'] }}</p>
         {% endfor %}
         <button type="submit">確定</button>
     </form>

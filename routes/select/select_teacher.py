@@ -14,10 +14,10 @@ def get_teacher_profile(teacher_id):
     try:
         # データベースに接続
         conn = mysql.connector.connect(**config)
-        cursor = conn.cursor()
+        cursor = conn.cursor(dictionary=True)  # 辞書形式で結果を取得
 
         # SQLクエリを実行
-        query = "SELECT name, email FROM teacher_profiles WHERE id = %s"
+        query = "SELECT * FROM teacher_profiles WHERE id = %s"
         cursor.execute(query, (teacher_id,))
 
         # 結果を取得
@@ -28,7 +28,20 @@ def get_teacher_profile(teacher_id):
         conn.close()
 
         if result:
-            return {'name': result[0], 'email': result[1]}
+            # 辞書形式の結果をそのまま返す
+            return {
+                'id': result['id'],
+                'name': result['name'],
+                'email': result['email'],
+                'password': result['password'],
+                'gender': result['gender'],
+                'exam_experience': result['exam_experience'],
+                'deviation_value': result['deviation_value'],
+                'club_activities': result['club_activities'],
+                'middle_school_type': result['middle_school_type'],
+                'teaching_style': result['teaching_style'],
+                'introduction': result['introduction']
+            }
         else:
             return None
 
