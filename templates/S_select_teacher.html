@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- W12 講師選択画面 -->
+    <!-- W 講師選択画面 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="../static/css/S_select_teacher.css">
+    <title>Document</title>
 </head>
 <body>
     <header>
@@ -15,7 +15,7 @@
                 <button>ログアウト</button>
             </a>
         </div>
-    </header> 
+    </header>
     <h2>ここではあなたに合う講師を選択してください</h2>
     <hr>
     <main>
@@ -25,7 +25,10 @@
                 {% for teacher_profile in teacher_profiles %}
                 <div class="teacher">
                     <div class="teacher-number">講師{{ loop.index }}</div>
-                    <label for="teacher_{{ teacher_profile['id'] }}">{{ teacher_profile['name'] }}</label>
+                    <p><strong>名前:</strong> {{ teacher_profile['name'] }}</p>
+                    <p><strong>性別:</strong> {{ teacher_profile['gender'] }}</p>
+                    <p><strong>部活動:</strong> {{ teacher_profile['club_activities'] }}</p>
+                    <p><strong>自己紹介:</strong> {{ teacher_profile['introduction'] }}</p>
                     <input type="radio" id="teacher_{{ teacher_profile['id'] }}" name="teacher_id" value="{{ teacher_profile['id'] }}">
                 </div>
                 {% endfor %}
@@ -34,7 +37,6 @@
                 <button class="confirm-button" type="submit">確定</button>
             </div>
         </form>
-        <div>
     </main>
 </body>
 </html>
