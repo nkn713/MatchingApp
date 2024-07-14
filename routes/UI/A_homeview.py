@@ -22,3 +22,7 @@ def A_matching_status():
     table_data = cur.fetchall()
     cur.close()
     return render_template('A_matching_status.html', table_data=table_data)
+
+@A_homeview_bp.route('/')
+def A_homeview():
+     return render_template('A_homeview.html')
