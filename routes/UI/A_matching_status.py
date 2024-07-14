@@ -17,12 +17,15 @@ def toggle_status(match_id):
     if request.method == 'POST':
         action = request.form['action']
         if action == 'toggle':
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM MatchInfo")
+            table_data = cur.fetchall()
+            cur.close()
             # 対象の行を見つけて、TrueをFalseに切り替える（この例では単純に反転する）
             for row in table_data:
                 if row[0] == match_id:
-                    row[3] = not row[3]  # TrueをFalseに、FalseをTrueに反転する
                     update_status_in_database(match_id)
-
+                    
         # 更新後、再度indexページにリダイレクトする
-        return redirect(url_for('A_matching_status.html'))
+        return redirect(url_for('A_homeview.A_matching_status'))
 
