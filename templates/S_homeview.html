@@ -25,7 +25,7 @@
                 <a href="{{ url_for('S_homeview.S_profile_input') }}">
                     <button>プロフィールを設定する</button>
                 </a>   
-                <a href="{{ url_for('evaluate.S_evaluate_teacher') }}">
+                <a href="{{ url_for('evaluate.S_evaluate_teacher', username=username) }}">
                     <button>講師を評価する</button>
                 </a>
             </div>
