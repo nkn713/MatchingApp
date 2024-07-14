@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学生の受講希望設定フォーム</title>
+
+    <title>生徒の受講希望科目・曜日・時限設定フォーム</title>
     <link rel="stylesheet" href="../static/css/S_take_attend.css">
 </head>
 <body>
-    <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん : 生徒用ホーム画面</div>
-        <a href="{{ url_for('logout.logout') }}">
-            <button class="logout-button">ログアウト</button>
-        </a>
-    </div>
-    <hr>
-    <h1>受講希望設定フォーム</h1>
-        <form action="{{ url_for('S_take_attend_bp.submit_preference') }}" method="post">
-
-
+    <header>
+        <div class="left">～ようこそ {{ username }} さん～</div>
+        <div class="right">
+            <a href="{{ url_for('logout.logout') }}">
+                <button>ログアウト</button>
+            </a>
+        </div>
+    </header>
+    <h1>受講希望科目・日時選択画面</h1>
+    <form action="{{ url_for('S_take_attend_bp.submit_preference') }}" method="post">
 
         <label for="subject">受講希望科目:</label>
-        <select id="subject" name="subject" required>
-            <option value="数学">数学</option>
-            <option value="英語">英語</option>
+        <select id="subject" name="subject" placeholder="科目を選択してください"required>
+            <option value="">--科目を選択--</option>
             <option value="国語">国語</option>
+            <option value="数学">数学</option>
             <option value="理科">理科</option>
             <option value="社会">社会</option>
+            <option value="英語">英語</option>
         </select><br><br>
 
         <label for="day">受講希望曜日:</label>
         <select id="day" name="day" required>
+            <option value="">--曜日を選択--</option>
             <option value="月曜日">月曜日</option>
             <option value="火曜日">火曜日</option>
             <option value="水曜日">水曜日</option>
@@ -41,6 +43,7 @@
 
         <label for="period">受講希望時限:</label>
         <select id="period" name="period" required>
+            <option value="">--時限を選択--</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -50,8 +53,10 @@
             <option value="7">7</option>
             <option value="8">8</option>
         </select><br><br>
-
-        <button type="submit">送信</button>
+        <div class="buttons">
+            <button class="back-button" onclick="location.href='{{ url_for('S_profile_input.student_home') }}'">戻る</button>
+            <button class="complete-button" type="submit">送信</button>
+        </div>
     </form>
     <div class="schedule-note">
         ※<span>1コマ：07:55～09:15</span><span>2コマ：09:25～10:45</span><span>3コマ：10:55～12:15</span><span>4コマ：13:10～14:30</span><span>5コマ：14:40～16:00</span><span>6コマ：17:00～17:50</span> <span>7コマ：18:00～18:50</span> <span>8コマ：19:00～19:50</span>
