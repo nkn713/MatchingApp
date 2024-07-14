@@ -3,7 +3,7 @@
 
 # 受け取った値をもとに、teacher_profileテーブルから講師情報を表示する関数
 
-# routes/review/pickup_teacher.py
+# MatchingApp/routes/review/pickup_teacher.py
 
 from flask import current_app
 from routes.review import mysql
