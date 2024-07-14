@@ -65,33 +65,57 @@ def calculate_match_score(student, teacher):
     return score
 
 def find_best_teachers(student_id):
-    student = fetch_student_profile(student_id)
-    student_prefs = fetch_student_preferences(student_id)
-    teachers = fetch_teacher_profiles()
-
-    matches = []
-    for teacher in teachers:
-        teacher_prefs = fetch_teacher_preferences(teacher['id'])
+    try:
+        student = fetch_student_profile(student_id)
+        student_prefs = fetch_student_preferences(student_id)
+        teachers = fetch_teacher_profiles()
         
-        match_found = True
-        for student_pref in student_prefs:
-            found_preference = False
-            for teacher_pref in teacher_prefs:
-                if (student_pref['subject'] == teacher_pref['subject'] and 
-                    student_pref['preferred_day'] == teacher_pref['preferred_day'] and 
-                    student_pref['preferred_period'] == teacher_pref['preferred_period']):
-                    found_preference = True
-                    break
-            if not found_preference:
-                match_found = False
-                break
+        print(f"Student: {student}")
+        print(f"Student Preferences: {student_prefs}")
+        print(f"Teachers: {teachers}")
 
-        if match_found:
-            score = calculate_match_score(student, teacher)
+        matches = []
+        for teacher in teachers:
+            teacher_prefs = fetch_teacher_preferences(teacher['id'])
+            
+            print(f"Checking teacher: {teacher['id']}")
+            print(f"Teacher Preferences: {teacher_prefs}")
+
+            # 教師のPreferencesが空の場合は除外
+            if not teacher_prefs:
+                continue
+
+            score = 0
+            for student_pref in student_prefs:
+                found_preference = False
+                for teacher_pref in teacher_prefs:
+                    if (student_pref['subject'] == teacher_pref['subject'] and 
+                        student_pref['preferred_day'] == teacher_pref['preferred_day'] and 
+                        student_pref['preferred_period'] == teacher_pref['preferred_period']):
+                        found_preference = True
+                        score += 1  # 完全一致でスコアを増加
+                        break
+                if not found_preference:
+                    # 部分一致でもスコアを増加させる（例：subjectの一致）
+                    for teacher_pref in teacher_prefs:
+                        if student_pref['subject'] == teacher_pref['subject']:
+                            score += 0.5  # 部分一致でスコアを少し増加
+                            break
+
+            # スコアに教師の他の要素を加味
+            score += calculate_match_score(student, teacher)
+
             matches.append((teacher['id'], score))
 
-    matches = sorted(matches, key=lambda x: x[1], reverse=True)
-    return [teacher_id for teacher_id, score in matches]
+        matches = sorted(matches, key=lambda x: x[1], reverse=True)
+        print(f"Matches found: {matches}")
+        return [teacher_id for teacher_id, score in matches]
+    except Exception as e:
+        print(f"Error in find_best_teachers: {e}")
+        return []
+
+
+
 
 class TestMatcher(unittest.TestCase):
     

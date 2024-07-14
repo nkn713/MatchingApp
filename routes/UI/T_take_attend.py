@@ -13,19 +13,21 @@ def submit_availability():
     if request.method == 'POST':
         teacher_id = get_profile_id(session.get('id'))
         subjects = request.form.getlist('subjects')
-        days = request.form.getlist('days')
+        day = request.form.get('day')
         periods = request.form.getlist('periods')
         username = session.get('username')
         action = request.form.get('action')
 
+        print(f"Received POST data: teacher_id={teacher_id}, subjects={subjects}, day={day}, periods={periods}, action={action}")
+
         if action == 'button1':
-            insert_or_update_availability(teacher_id, subjects, days, periods)
+            insert_or_update_availability(teacher_id, subjects, day, periods)
             return render_template('T_take_attend.html', username=username)
         elif action == 'button2':
-            result = insert_or_update_availability(teacher_id, subjects, days, periods)
+            result = insert_or_update_availability(teacher_id, subjects, day, periods)
             return render_template('T_homeview.html', result=result, username=username)
     else:
-        return redirect(url_for('T_take_attend.index'))  # GETリクエストの場合のレスポンス
+        return redirect(url_for('T_take_attend.index'))
 
 @T_take_attend_bp.route('/T_homeview')
 def back_homeview():

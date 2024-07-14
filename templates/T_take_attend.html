@@ -19,7 +19,7 @@
     <h1>出勤可能日時・科目選択画面</h1>
     <form action="{{ url_for('T_take_attend.submit_availability') }}" method="post">
         <label>出勤可能曜日:</label>
-        <select id="days" name="days" required>
+        <select id="days" name="day" required>
             <option value="">--曜日を選択--</option>
             <option value="月曜日">月曜日</option>
             <option value="火曜日">火曜日</option>
