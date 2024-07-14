@@ -11,7 +11,7 @@ def T_profile_input():
     password = session.get('password')  # セッションからパスワードを取得
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
-        return redirect(url_for('register.login'))
+        return redirect(url_for('logout.logout'))
 
     if request.method == 'POST':
         gender = request.form.get('gender')
