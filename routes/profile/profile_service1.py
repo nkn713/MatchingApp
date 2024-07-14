@@ -49,7 +49,8 @@ def process_student_profile(email, name, gender, preferred_gender, purpose, targ
         traceback.print_exc()
         raise e
 
-def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
+
+def process_teacher_profile(email, name, gender, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
     print(f'Processing profile for {email}')
     db = get_db()
     try:
@@ -64,8 +65,6 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                     UPDATE teacher_profiles 
                     SET name = COALESCE(%s, name),
                         gender = COALESCE(%s, gender),
-                        university = COALESCE(%s, university),
-                        department = COALESCE(%s, department),
                         exam_experience = COALESCE(%s, exam_experience),
                         deviation_value = COALESCE(%s, deviation_value),
                         club_activities = COALESCE(%s, club_activities),
@@ -76,7 +75,7 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                     WHERE email = %s
                 """
                 params = (
-                    name, gender, university, department, exam_experience, deviation_value,
+                    name, gender, exam_experience, deviation_value,
                     club_activity, middle_school_type, teaching_style,
                     introduction, password, email
                 )
@@ -84,11 +83,11 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                 # レコードが存在しない場合、新規挿入
                 sql = """
                     INSERT INTO teacher_profiles 
-                    (email, name, gender, university, department, exam_experience, deviation_value, club_activities, middle_school_type, teaching_style, introduction, password) 
-                    VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (email, name, gender, exam_experience, deviation_value, club_activities, middle_school_type, teaching_style, introduction, password) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 params = (
-                    email, name, gender, university, department, exam_experience,
+                    email, name, gender, exam_experience,
                     int(deviation_value), club_activity, middle_school_type,
                     teaching_style, introduction, password
                 )
@@ -102,3 +101,4 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
         print(f'Error saving profile: {e}')
         traceback.print_exc()
         raise e
+    
