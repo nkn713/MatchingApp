@@ -16,7 +16,7 @@ def T_profile_input():
     if request.method == 'POST':
         gender = request.form.get('gender')
         university = request.form.get('university')
-        department = request.form.get('department')  # 新しいフィールド
+        department = request.form.get('department')
         exam_experience = request.form.getlist('exam_experience')  # getlistで複数のチェックボックスの値を取得
         deviation_value = request.form.get('deviation_value')
         club_activity = request.form.get('club_activity')
@@ -44,10 +44,6 @@ def T_profile_input():
             form_data = request.form.to_dict(flat=False)
             form_data['exam_experience'] = exam_experience  # リストを含める
             return render_template('T_profile_input.html', form_data=form_data, errors=errors, username=session.get('username'))
-
-        # exam_experience がリストであることを確認
-        if not isinstance(exam_experience, list):
-            exam_experience = []
 
         try:
             # exam_experience を文字列に変換

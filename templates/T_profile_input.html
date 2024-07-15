@@ -41,22 +41,23 @@
                 <div class="error-message">{{ errors['department'] }}</div>
                 {% endif %}   
             </div>
-        <div class="form-group">
-            <label for="exam_experience">受験経験:</label><br>
-            <input type="checkbox" id="middle_school_exam" name="middle_school_exam" value="middle_school_exam" {% if 'middle_school_exam' in form_data %}checked{% endif %}>
-            <label for="middle_school_exam">中学受験</label><br>
-            <input type="checkbox" id="public_high_school_exam" name="public_high_school_exam" value="public_high_school_exam" {% if 'public_high_school_exam' in form_data %}checked{% endif %}>
-            <label for="public_high_school_exam">国公立高校受験</label><br>
-            <input type="checkbox" id="private_high_school_exam" name="private_high_school_exam" value="private_high_school_exam" {% if 'private_high_school_exam' in form_data %}checked{% endif %}>
-            <label for="private_high_school_exam">私立高校受験</label><br>
-            <input type="checkbox" id="public_university_exam" name="public_university_exam" value="public_university_exam" {% if 'public_university_exam' in form_data %}checked{% endif %}>
-            <label for="public_university_exam">国公立大学受験</label><br>
-            <input type="checkbox" id="private_university_exam" name="private_university_exam" value="private_university_exam" {% if 'private_university_exam' in form_data %}checked{% endif %}>
-            <label for="private_university_exam">私立大学受験</label><br>
-            {% if errors.get('exam_experience') %}
-            <div class="error-message">{{ errors['exam_experience'] }}</div>
-            {% endif %}
-        </div>
+            <div class="form-group">
+                <label for="exam_experience">受験経験:</label><br>
+                <input type="checkbox" id="middle_school_exam" name="exam_experience" value="中学受験" {% if '中学受験' in form_data.get('exam_experience', []) %}checked{% endif %}>
+                <label for="middle_school_exam">中学受験</label><br>
+                <input type="checkbox" id="public_high_school_exam" name="exam_experience" value="国公立高校受験" {% if '国公立高校受験' in form_data.get('exam_experience', []) %}checked{% endif %}>
+                <label for="public_high_school_exam">国公立高校受験</label><br>
+                <input type="checkbox" id="private_high_school_exam" name="exam_experience" value="私立高校受験" {% if '私立高校受験' in form_data.get('exam_experience', []) %}checked{% endif %}>
+                <label for="private_high_school_exam">私立高校受験</label><br>
+                <input type="checkbox" id="public_university_exam" name="exam_experience" value="国公立大学受験" {% if '国公立大学受験' in form_data.get('exam_experience', []) %}checked{% endif %}>
+                <label for="public_university_exam">国公立大学受験</label><br>
+                <input type="checkbox" id="private_university_exam" name="exam_experience" value="私立大学受験" {% if '私立大学受験' in form_data.get('exam_experience', []) %}checked{% endif %}>
+                <label for="private_university_exam">私立大学受験</label><br>
+                {% if errors.get('exam_experience') %}
+                <div class="error-message">{{ errors['exam_experience'] }}</div>
+                {% endif %}
+            </div>        
+
             <div class="form-group">
                 <label for="deviation_value">偏差値:</label>
                 <input type="number" id="deviation_value" name="deviation_value" value="{{ form_data.get('deviation_value', '') }}" placeholder="例)60" required>
