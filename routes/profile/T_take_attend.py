@@ -7,7 +7,6 @@ db_config = {
     'password': 'pass08',
     'host': 'localhost',
     'database': 'MATCHINGAPP',
-    'port':'50800'
 }
 
 def insert_or_update_availability(teacher_id, subjects, day, periods):
