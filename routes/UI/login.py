@@ -1,5 +1,4 @@
-# login.py
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from routes.auth.auth1 import loginauth, get_username, get_id
 
 login_bp = Blueprint('login', __name__)
@@ -15,6 +14,8 @@ def login():
         if loginauth(password, email, user_type):
             session['username'] = get_username(password, email, user_type)
             session['id'] = get_id(password, email, user_type)
+            session['email'] = email
+            session['password'] = password
             if user_type == 'student':
                 return redirect(url_for('login.student_home'))
             elif user_type == 'teacher':
@@ -22,7 +23,8 @@ def login():
             elif user_type == 'admin':
                 return redirect(url_for('login.admin_home'))
         else:
-            return "Login Failed. Please check your credentials."
+            flash('ログインに失敗しました。資格情報を確認してください。', 'error')
+            return redirect(url_for('login.login'))
 
     return render_template('login.html')
 

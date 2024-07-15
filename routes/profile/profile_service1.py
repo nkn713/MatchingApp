@@ -49,6 +49,7 @@ def process_student_profile(email, name, gender, preferred_gender, purpose, targ
         traceback.print_exc()
         raise e
 
+
 def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
     print(f'Processing profile for {email}')
     db = get_db()
@@ -57,7 +58,7 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
             # レコードが存在するか確認
             cursor.execute("SELECT id FROM teacher_profiles WHERE email = %s", (email,))
             result = cursor.fetchone()
-            
+
             if result:
                 # レコードが存在する場合、更新
                 sql = """
@@ -76,23 +77,21 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                     WHERE email = %s
                 """
                 params = (
-                    name, gender, university, department, exam_experience, deviation_value,
-                    club_activity, middle_school_type, teaching_style,
-                    introduction, password, email
+                    name, gender, university, department, exam_experience, deviation_value, 
+                    club_activity, middle_school_type, teaching_style, introduction, password, email
                 )
             else:
                 # レコードが存在しない場合、新規挿入
                 sql = """
                     INSERT INTO teacher_profiles 
-                    (email, name, gender, university, department, exam_experience, deviation_value, club_activities, middle_school_type, teaching_style, introduction, password) 
-                    VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 params = (
-                    email, name, gender, university, department, exam_experience,
-                    int(deviation_value), club_activity, middle_school_type,
-                    teaching_style, introduction, password
+                    email, name, gender, university, department, exam_experience, deviation_value,
+                    club_activity, middle_school_type, teaching_style, introduction, password
                 )
-                
+
             print(f"SQL: {sql}")
             print(f"Params: {params}")
             cursor.execute(sql, params)
@@ -102,3 +101,4 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
         print(f'Error saving profile: {e}')
         traceback.print_exc()
         raise e
+    

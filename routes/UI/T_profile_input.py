@@ -9,9 +9,10 @@ def T_profile_input():
     email = session.get('email')
     name = session.get('username')  # セッションから名前を取得
     password = session.get('password')  # セッションからパスワードを取得
+
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
-        return redirect(url_for('logout.logout'))
+        return redirect(url_for('login.login'))
 
     if request.method == 'POST':
         gender = request.form.get('gender')
