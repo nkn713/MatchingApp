@@ -6,7 +6,7 @@ T_take_attend_bp = Blueprint('T_take_attend', __name__)
 
 @T_take_attend_bp.route('/')
 def index():
-    return render_template('T_take_attend.html')
+    return render_template('T_take_attend.html', username=session.get('username'))
 
 @T_take_attend_bp.route('/submit_availability', methods=['GET', 'POST'])
 def submit_availability():
