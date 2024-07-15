@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5b2b2; /* 背景色 */
+    padding: 10px 20px; /* 上下左右の余白 */
+    color: #f2f2f2; /* テキストカラー */
+}
+
+header .left {
+    flex: 1;
+    text-align: center; /* 中央揃え */
+    font-size: 30px;
+    color: #0c0c0c;  
+}
+
+header .right {
+    background-color: #4CAF50; /* ボタンの背景色 */
+    border: 2px solid #67e86c; /* ボーダーカラー */
+    padding: 10px 20px;
+    font-size: 25px; /* フォントサイズ */
+    border-radius: 10px;
+    cursor: pointer;
+    color: #f2f2f2; /* テキストカラー */
+}
+
+header .right button {
+    font-size: 25px; /* ボタン内のテキストサイズ */
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #f2f2f2; /* テキストカラー */
+    cursor: pointer;
+}
+
+header .right button:hover {
+    border: 2px solid #67e86c; /* ホバー時のボーダーカラー */
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.match-list {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    flex-wrap: wrap; /* 要素を複数行に表示 */
+    gap: 20px; /* 要素間の間隔 */
+}
+
+.teacher {
+    display: flex;
+    flex-direction: column; /* 垂直方向に要素を配置 */
+    align-items: center; /* 中央揃え */
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 200px; /* カードの最大幅 */
+}
+
+.teacher-number {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.teacher img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.teacher input[type="radio"] {
+    margin-top: 10px; /* ラベルとラジオボタンの間の余白 */
+}
+
+.teacher label {
+    font-weight: bold;
+    color: #333;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.confirm-button {
+    background-color: #c6e9f2;
+    color: black;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background-color: #f60808;
+}

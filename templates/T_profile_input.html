@@ -5,38 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>講師プロフィール設定</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/T_profile_input.css') }}">
-    <style>
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .checkbox-item {
-            margin-right: 10px;
-            display: flex;
-            align-items: center.
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-between.
-        }
-        .back-button, .complete-button {
-            padding: 10px 20px.
-            background-color: #4CAF50.
-            color: white.
-            border: none.
-            cursor: pointer.
-        }
-        .back-button {
-            background-color: #f44336.
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -53,6 +21,7 @@
             <div class="form-group">
                 <label for="gender">性別:</label>
                 <select id="gender" name="gender" required>
+                    <option value="">--性別を選択--</option>
                     <option value="男性" {% if form_data.get('gender') == '男性' %}selected{% endif %}>男性</option>
                     <option value="女性" {% if form_data.get('gender') == '女性' %}selected{% endif %}>女性</option>
                     <option value="その他" {% if form_data.get('gender') == 'その他' %}selected{% endif %}>その他</option>
@@ -88,6 +57,7 @@
                 <div class="error-message">{{ errors['exam_experience'] }}</div>
                 {% endif %}
             </div>        
+
             <div class="form-group">
                 <label for="deviation_value">偏差値:</label>
                 <input type="number" id="deviation_value" name="deviation_value" value="{{ form_data.get('deviation_value', '') }}" placeholder="例)60" required>
@@ -105,6 +75,7 @@
             <div class="form-group">
                 <label for="middle_school_type">中学校の種類:</label>
                 <select id="middle_school_type" name="middle_school_type" required>
+                    <option value="">--公立または私立を選択--</option>
                     <option value="公立" {% if form_data.get('middle_school_type') == '公立' %}selected{% endif %}>公立</option>
                     <option value="私立" {% if form_data.get('middle_school_type') == '私立' %}selected{% endif %}>私立</option>
                 </select>

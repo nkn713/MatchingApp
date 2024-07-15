@@ -24,7 +24,27 @@ def get_teacher_profiles(teacher_ids):
             result = cursor.fetchall()
             print(f"Query result: {result}")
 
-            return result
+            # 結果をカラム名をキーとする辞書形式に変換
+            teacher_profiles_list = []
+            for teacher in result:
+                teacher_dict = {
+                    "id": teacher["id"],
+                    "name": teacher["name"],
+                    "email": teacher["email"],
+                    "password": teacher["password"],
+                    "gender": teacher["gender"],
+                    "university": teacher["university"],
+                    "department": teacher["department"],
+                    "exam_experience": teacher["exam_experience"],
+                    "deviation_value": teacher["deviation_value"],
+                    "club_activities": teacher["club_activities"],
+                    "middle_school_type": teacher["middle_school_type"],
+                    "teaching_style": teacher["teaching_style"],
+                    "introduction": teacher["introduction"]
+                }
+                teacher_profiles_list.append(teacher_dict)
+
+            return teacher_profiles_list
 
     except Error as e:
         print("Error while connecting to MySQL", e)

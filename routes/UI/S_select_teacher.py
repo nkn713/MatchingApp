@@ -2,6 +2,7 @@ from flask import render_template, Blueprint, request, redirect, url_for, sessio
 from routes.select.select_teacher import get_teacher_profile, insert_match_status
 from routes.select.send_emails import send_match_emails
 from routes.history.match_history import insert_match_history
+from routes.get_info.get_some_id import get_profile_id
 
 S_select_teacher_bp = Blueprint('S_select_teacher', __name__)
 
@@ -9,7 +10,7 @@ S_select_teacher_bp = Blueprint('S_select_teacher', __name__)
 def confirm():
     if request.method == 'POST':
         #ログイン情報から生徒idを取得してinser_match_statusの第一引数に代入
-        student_id = session.get('id')
+        student_id = get_profile_id(session.get('id'))
         teacher_id = request.form['teacher_id']
         match_id = insert_match_status(student_id, teacher_id)
         history = insert_match_history(student_id, teacher_id)

@@ -1,37 +1,41 @@
+<!-- MatchingApp/templates/S_homeview.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- W3 生徒用ホーム画面 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生徒用ホーム画面</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/S_homeview.css') }}">
-
+    <link rel="stylesheet" href="../static/css/S_homeview.css">
 </head>
+  
 <body>
-    <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん : 生徒用ホーム画面</div>
-        <a href="{{ url_for('logout.logout') }}">
-            <button class="logout-button">ログアウト</button>
+    <header>
+        <div class="left">～ようこそ {{ username }} さん～</div>
+        <div class="right">
+            <a href="{{ url_for('logout.logout') }}">
+                <button>ログアウト</button>
+            </a>
+        </div>
+    </header>
+    <h2>生徒用ホーム画面<h2>
+    <hr>
+    <div class="content-background">
+        <div class="button-container">
+            <div class="button-row">
+                <a href="{{ url_for('S_homeview.S_profile_input') }}">
+                    <button>プロフィールを設定する</button>
+                </a>   
+                <a href="{{ url_for('evaluate.S_evaluate_teacher', username=username) }}">
+                    <button>講師を評価する</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="start-match">
+        <a href="{{ url_for('S_homeview.S_take_attend') }}">
+                <button>マッチを開始する</button>
         </a>
     </div>
-    <hr>
-    <div class="button-container">
-        <div class="button-row">
-            <a href="{{ url_for('S_homeview.S_profile_input') }}">
-                <button>プロフィールを設定する</button>
-            </a>
-        </div>
-        <div class="button-row">
-            <a href="{{ url_for('S_homeview.S_take_attend') }}">
-                <button>マッチを始める</button>
-            </a>
-            <a href="{{ url_for('evaluate.S_evaluate_teacher') }}">
-                <button>講師を評価する</button>
-            </a>
-        </div>
-    </div>
-    <hr>
 </body>
 </html>

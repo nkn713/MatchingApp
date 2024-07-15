@@ -8,21 +8,35 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <div class="welcome-message">ようこそ {{ username }} さん : 生徒用ホーム画面</div>
-        <a href="{{ url_for('logout.logout') }}">
-            <button class="logout-button">ログアウト</button>
-        </a>
-    </div>
-    <h1>教師選択</h1>
-    <h2>以下の講師とマッチングしました！</h2>
-    <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
-        {% for teacher_profile in teacher_profiles%}
-        <input type="radio" name="teacher_id" value="{{teacher_profile['id']}}">
-        <label for="teacher">{{ teacher_profile['name'] }}</label>
-        <br>
-        {% endfor %}
-        <button type="submit">確定</button>
-    </form>
+    <header>
+        <div class="left">{{ username }} さんの講師が見つかりました!!</div>
+        <div class="right">
+            <a href="{{ url_for('logout.logout') }}">
+                <button>ログアウト</button>
+            </a>
+        </div>
+    </header>
+    <h2>ここではあなたに合う講師を選択してください</h2>
+    <hr>
+    <main>
+        <h3>以下の講師とマッチングしました！</h3>
+        <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
+            <div class="match-list">
+                {% for teacher_profile in teacher_profiles %}
+                <div class="teacher">
+                    <div class="teacher-number">講師{{ loop.index }}</div>
+                    <p><strong>名前:</strong> {{ teacher_profile['name'] }}</p>
+                    <p><strong>性別:</strong> {{ teacher_profile['gender'] }}</p>
+                    <p><strong>部活動:</strong> {{ teacher_profile['club_activities'] }}</p>
+                    <p><strong>自己紹介:</strong> {{ teacher_profile['introduction'] }}</p>
+                    <input type="radio" id="teacher_{{ teacher_profile['id'] }}" name="teacher_id" value="{{ teacher_profile['id'] }}">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="buttons">
+                <button class="confirm-button" type="submit">確定</button>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
