@@ -87,7 +87,7 @@
                 {% if errors.get('exam_experience') %}
                 <div class="error-message">{{ errors['exam_experience'] }}</div>
                 {% endif %}
-            </div>            
+            </div>        
             <div class="form-group">
                 <label for="deviation_value">偏差値:</label>
                 <input type="number" id="deviation_value" name="deviation_value" value="{{ form_data.get('deviation_value', '') }}" placeholder="例)60" required>
