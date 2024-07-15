@@ -16,6 +16,13 @@ def insert_preference(student_id, subject, day, period):
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
 
+        # 同じstudent_idを持つすべてのレコードを削除
+        cursor.execute("""
+            DELETE FROM student_preferences
+            WHERE student_id = %s
+        """, (student_id,))
+
+        # 新しいレコードを挿入
         cursor.execute("""
             INSERT INTO student_preferences (student_id, subject, preferred_day, preferred_period)
             VALUES (%s, %s, %s, %s)
@@ -33,7 +40,6 @@ def insert_preference(student_id, subject, day, period):
 
     except mysql.connector.Error as err:
         return None, f"エラー: {err}"
-
 
 def check_student_profile_complete(student_id):
     try:

@@ -95,17 +95,14 @@ def find_best_teachers(student_id):
                         found_preference = True
                         score += 1  # 完全一致でスコアを増加
                         break
-                if not found_preference:
-                    # 部分一致でもスコアを増加させる（例：subjectの一致）
-                    for teacher_pref in teacher_prefs:
-                        if student_pref['subject'] == teacher_pref['subject']:
-                            score += 0.5  # 部分一致でスコアを少し増加
-                            break
+                if found_preference:
+                    break
 
-            # スコアに教師の他の要素を加味
-            score += calculate_match_score(student, teacher)
-
-            matches.append((teacher['id'], score))
+            # スコアが1以上の場合はこの教師をリストに追加
+            if score > 0:
+                # スコアに教師の他の要素を加味
+                score += calculate_match_score(student, teacher)
+                matches.append((teacher['id'], score))
 
         matches = sorted(matches, key=lambda x: x[1], reverse=True)
         print(f"Matches found: {matches}")
