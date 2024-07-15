@@ -27,6 +27,7 @@
                     <div class="teacher-number">講師{{ loop.index }}</div>
                     <p><strong>名前:</strong> {{ teacher_profile['name'] }}</p>
                     <p><strong>性別:</strong> {{ teacher_profile['gender'] }}</p>
+                    <p><strong>大学:</strong> {{ teacher_profile['university'] }}</p>
                     <p><strong>部活動:</strong> {{ teacher_profile['club_activities'] }}</p>
                     <p><strong>自己紹介:</strong> {{ teacher_profile['introduction'] }}</p>
                     <input type="radio" id="teacher_{{ teacher_profile['id'] }}" name="teacher_id" value="{{ teacher_profile['id'] }}">
