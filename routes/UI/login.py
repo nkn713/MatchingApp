@@ -23,7 +23,7 @@ def login():
             elif user_type == 'admin':
                 return redirect(url_for('login.admin_home'))
         else:
-            flash('ログインに失敗しました。資格情報を確認してください。', 'error')
+            flash('LoginFailed.Pleasecheck your credentials.', 'error')
             return redirect(url_for('login.login'))
 
     return render_template('login.html')
