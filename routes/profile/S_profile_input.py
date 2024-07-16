@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
@@ -13,7 +14,7 @@ def get_db_connection():
     )
     return connection
 
-#@app.route('/S_profile_input', methods=['GET', 'POST'])
+@app.route('/S_profile_input', methods=['GET', 'POST'])
 def S_profile_input():
     if request.method == 'POST':
         name = request.form.get('name')

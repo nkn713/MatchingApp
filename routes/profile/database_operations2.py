@@ -7,7 +7,7 @@ def get_db():
             host='localhost',
             user='team08',   # MySQLユーザー名
             password='pass08',  # MySQLユーザーのパスワード
-            database='matchingapp'  # データベース名
+            database='MatchingApp'  # データベース名
         )
     return g.db
 
