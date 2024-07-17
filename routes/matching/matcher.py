@@ -1,6 +1,7 @@
 import mysql.connector
 import unittest
 
+
 def get_db_connection():
     connection = mysql.connector.connect(
         host='localhost',
