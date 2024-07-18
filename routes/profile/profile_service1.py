@@ -50,7 +50,7 @@ def process_student_profile(email, name, gender, preferred_gender, purpose, targ
         raise e
 
 
-def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
+def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activities, middle_school_type, teaching_style, introduction, password):
     print(f'Processing profile for {email}')
     db = get_db()
     try:
@@ -78,18 +78,18 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                 """
                 params = (
                     name, gender, university, department, exam_experience, deviation_value, 
-                    club_activity, middle_school_type, teaching_style, introduction, password, email
+                    club_activities, middle_school_type, teaching_style, introduction, password, email
                 )
             else:
                 # レコードが存在しない場合、新規挿入
                 sql = """
                     INSERT INTO teacher_profiles 
-                    (email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password) 
+                    (email, name, gender, university, department, exam_experience, deviation_value, club_activities, middle_school_type, teaching_style, introduction, password) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 params = (
                     email, name, gender, university, department, exam_experience, deviation_value,
-                    club_activity, middle_school_type, teaching_style, introduction, password
+                    club_activities, middle_school_type, teaching_style, introduction, password
                 )
 
             print(f"SQL: {sql}")
