@@ -51,8 +51,14 @@ def T_profile_input():
             exam_experience = []
 
         try:
-            # exam_experience を文字列に変換
-            exam_experience_str = ','.join(exam_experience)
+            # exam_experience が空なら None を設定
+            exam_experience_str = ','.join(exam_experience) if exam_experience else None
+
+            # デバッグ: process_teacher_profileに渡されるデータの出力
+            print(f"process_teacher_profile called with: email={email}, name={name}, gender={gender}, university={university}, "
+                  f"department={department}, exam_experience={exam_experience_str}, deviation_value={deviation_value}, "
+                  f"club_activity={club_activity}, middle_school_type={middle_school_type}, teaching_style={teaching_style}, "
+                  f"introduction={introduction}, password={password}")
 
             process_teacher_profile(
                 email, name, gender, university, department, exam_experience_str, deviation_value, club_activity,
