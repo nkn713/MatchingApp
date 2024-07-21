@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/S_select_teacher.css">
     <title>Document</title>
+    <script>
+        function validateForm() {
+            const radios = document.getElementsByName('teacher_id');
+            let formValid = false;
+
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    formValid = true;
+                    break;
+                }
+            }
+
+            if (!formValid) {
+                alert('講師を選択してください。');
+            }
+
+            return formValid;
+        }
+
+        window.onload = function() {
+            document.getElementById('teacherForm').onsubmit = function() {
+                return validateForm();
+            };
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -20,7 +45,7 @@
     <hr>
     <main>
         <h3>以下の講師とマッチングしました！</h3>
-        <form method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
+        <form id="teacherForm" method="POST" action="{{ url_for('S_select_teacher.confirm') }}">
             <div class="match-list">
                 {% for teacher_profile in teacher_profiles %}
                 <div class="teacher">
