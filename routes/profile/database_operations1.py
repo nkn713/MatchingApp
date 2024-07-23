@@ -9,8 +9,9 @@ def init_app(app):
 
     @app.teardown_appcontext
     def close_db(error):
-        if hasattr(g, 'db'):
-            g.db.close()
+        db = g.pop('db', None)
+        if db is not None:
+            db.close()
 
 def get_db():
     if 'db' not in g:

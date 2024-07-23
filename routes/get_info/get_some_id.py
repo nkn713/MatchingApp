@@ -1,4 +1,4 @@
-from flask import current_app, g
+from flask import current_app
 from routes.profile.database_operations1 import get_db
 
 # ログインIDからプロフィールIDを取得する関数
@@ -37,4 +37,3 @@ def get_profile_id(login_id):
 
     finally:
         cursor.close()
-
