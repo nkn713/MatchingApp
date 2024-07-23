@@ -1,21 +1,16 @@
-import mysql.connector
+from flask import current_app, g
+from routes.profile.database_operations1 import get_db
 
 # ログインIDからプロフィールIDを取得する関数
 def get_profile_id(login_id):
-    # MySQLデータベースに接続
-    conn = mysql.connector.connect(
-        host='localhost',
-        user='team08',
-        password='pass08',
-        database='MATCHINGAPP'
-    )
-    cursor = conn.cursor()
+    db = get_db()
+    cursor = db.cursor()
 
     try:
         # ログインIDからemailとuser_typeを取得
         cursor.execute("SELECT email, user_type FROM login WHERE id = %s", (login_id,))
         result = cursor.fetchone()
-        print(f"Login query result: {result}")
+        current_app.logger.debug(f"Login query result: {result}")
 
         if result is None:
             return None
@@ -32,7 +27,7 @@ def get_profile_id(login_id):
         else:
             return None
 
-        print(f"Profile query result: {profile_result}")
+        current_app.logger.debug(f"Profile query result: {profile_result}")
 
         if profile_result is None:
             return None
@@ -42,4 +37,4 @@ def get_profile_id(login_id):
 
     finally:
         cursor.close()
-        conn.close()
+
