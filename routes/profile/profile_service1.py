@@ -1,3 +1,4 @@
+# routes/profile/profile_service1.py
 from routes.profile.database_operations1 import get_db
 import traceback
 from flask import current_app
@@ -50,6 +51,7 @@ def process_student_profile(email, name, gender, preferred_gender, purpose, targ
         current_app.logger.error(f'Error saving profile: {e}')
         current_app.logger.error(traceback.format_exc())
         raise e
+
 
 
 def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
