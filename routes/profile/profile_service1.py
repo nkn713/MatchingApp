@@ -1,8 +1,9 @@
 from routes.profile.database_operations1 import get_db
 import traceback
+from flask import current_app
 
-def process_student_profile(email, name, gender, preferred_gender, purpose, target_school_level, club_activity, school_type):
-    print(f'Processing profile for {email}')
+def process_student_profile(email, name, gender, preferred_gender, purpose, target_school_level, club_activity, school_type, password):
+    current_app.logger.debug(f'Processing profile for {email}')
     db = get_db()
     try:
         with db.cursor() as cursor:
@@ -20,38 +21,39 @@ def process_student_profile(email, name, gender, preferred_gender, purpose, targ
                         purpose = COALESCE(%s, purpose),
                         target_school_level = COALESCE(%s, target_school_level),
                         club_activity = COALESCE(%s, club_activity),
-                        school_type = COALESCE(%s, school_type)
+                        school_type = COALESCE(%s, school_type),
+                        password = COALESCE(%s, password)
                     WHERE email = %s
                 """
                 params = (
                     name, gender, preferred_gender, purpose, target_school_level, 
-                    club_activity, school_type, email
+                    club_activity, school_type, password, email
                 )
             else:
                 # レコードが存在しない場合、新規挿入
                 sql = """
                     INSERT INTO student_profiles 
-                    (email, name, gender, preferred_gender, purpose, target_school_level, club_activity, school_type) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    (email, name, gender, preferred_gender, purpose, target_school_level, club_activity, school_type, password) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 params = (
                     email, name, gender, preferred_gender, purpose, target_school_level,
-                    club_activity, school_type
+                    club_activity, school_type, password
                 )
 
-            print(f"SQL: {sql}")
-            print(f"Params: {params}")
+            current_app.logger.debug(f"SQL: {sql}")
+            current_app.logger.debug(f"Params: {params}")
             cursor.execute(sql, params)
             db.commit()
-            print('Profile saved to database')
+            current_app.logger.info('Profile saved to database')
     except Exception as e:
-        print(f'Error saving profile: {e}')
-        traceback.print_exc()
+        current_app.logger.error(f'Error saving profile: {e}')
+        current_app.logger.error(traceback.format_exc())
         raise e
 
 
 def process_teacher_profile(email, name, gender, university, department, exam_experience, deviation_value, club_activity, middle_school_type, teaching_style, introduction, password):
-    print(f'Processing profile for {email}')
+    current_app.logger.debug(f'Processing profile for {email}')
     db = get_db()
     try:
         with db.cursor() as cursor:
@@ -92,13 +94,12 @@ def process_teacher_profile(email, name, gender, university, department, exam_ex
                     club_activity, middle_school_type, teaching_style, introduction, password
                 )
 
-            print(f"SQL: {sql}")
-            print(f"Params: {params}")
+            current_app.logger.debug(f"SQL: {sql}")
+            current_app.logger.debug(f"Params: {params}")
             cursor.execute(sql, params)
             db.commit()
-            print('Profile saved to database')
+            current_app.logger.info('Profile saved to database')
     except Exception as e:
-        print(f'Error saving profile: {e}')
-        traceback.print_exc()
+        current_app.logger.error(f'Error saving profile: {e}')
+        current_app.logger.error(traceback.format_exc())
         raise e
-    

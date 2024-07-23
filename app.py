@@ -66,4 +66,4 @@ app.register_blueprint(matching_bp, url_prefix='/matching')
 app.register_blueprint(take_subject_bp, url_prefix='/S_take_subject') 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=50801)

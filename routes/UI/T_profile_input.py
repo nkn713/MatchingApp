@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app
 from routes.profile.profile_service1 import process_teacher_profile
 from routes.profile.error_handling import ValidationError, handle_error
+import traceback
 
 T_profile_input_bp = Blueprint('T_profile_input_bp', __name__)
 
@@ -26,9 +27,9 @@ def T_profile_input():
         introduction = request.form.get('introduction')
 
         # デバッグ: フォームデータの出力
-        print(f"gender: {gender}, university: {university}, department: {department}, "
-              f"exam_experience: {exam_experience}, deviation_value: {deviation_value}, club_activity: {club_activity}, "
-              f"middle_school_type: {middle_school_type}, teaching_style: {teaching_style}, introduction: {introduction}")
+        current_app.logger.debug(f"gender: {gender}, university: {university}, department: {department}, "
+                                 f"exam_experience: {exam_experience}, deviation_value: {deviation_value}, club_activity: {club_activity}, "
+                                 f"middle_school_type: {middle_school_type}, teaching_style: {teaching_style}, introduction: {introduction}")
 
         # フォームデータの検証
         errors = {}
@@ -61,6 +62,8 @@ def T_profile_input():
             errors[field_name] = message
             return render_template('T_profile_input.html', username=session.get('username'), form_data=request.form.to_dict(), errors=errors)
         except Exception as e:
+            current_app.logger.error(f'予期しないエラーが発生しました: {e}')  # ログにエラーを記録
+            current_app.logger.error(traceback.format_exc())
             flash(f'予期しないエラーが発生しました: {e}', 'error')
             return render_template('T_profile_input.html', username=session.get('username'), form_data=request.form.to_dict(), errors={})
 
