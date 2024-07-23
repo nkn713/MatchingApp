@@ -16,8 +16,8 @@ def student_home():
 @S_profile_input_bp.route('/profile', methods=['GET', 'POST'])
 def profile():
     email = session.get('email')
-    username = session.get('username')  # セッションから名前を取得
-    password = session.get('password')  # セッションからパスワードを取得
+    username = session.get('username')
+    password = session.get('password')
 
     if not email:
         flash('セッションにメールアドレスがありません。再度ログインしてください。', 'error')
@@ -32,9 +32,9 @@ def profile():
         school_type = request.form.get('school_type')
 
         # デバッグ: フォームデータの出力
-        current_app.logger.debug(f"gender: {gender}, preferred_gender: {preferred_gender}, purpose: {purpose}, "
-                                 f"target_school_level: {target_school_level}, club_activity: {club_activity}, "
-                                 f"school_type: {school_type}")
+        current_app.logger.debug(f"Form Data: gender={gender}, preferred_gender={preferred_gender}, purpose={purpose}, "
+                                 f"target_school_level={target_school_level}, club_activity={club_activity}, "
+                                 f"school_type={school_type}")
 
         # フォームデータの検証
         errors = {}
@@ -60,7 +60,7 @@ def profile():
         except Exception as e:
             current_app.logger.error(f'予期しないエラーが発生しました: {e}')  # ログにエラーを記録
             current_app.logger.error(traceback.format_exc())
-            flash(f'予期しないエラーが発生しました: {e}', 'error')
+            flash('予期しないエラーが発生しました。再度お試しください。', 'error')
             return render_template('S_profile_input.html', username=username, form_data=request.form.to_dict(), errors={})
 
     # GETリクエストの場合はフォームを表示
